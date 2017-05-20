@@ -1,15 +1,21 @@
 package de.torqdev.jegl.core;
 
+import java.util.stream.IntStream;
+
+import static org.apache.commons.lang3.ArrayUtils.*;
+
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
 public class FloatImage {
+    private final int channels;
     private float[] rawData;
-    private int width;
+    private final int width;
 
     public FloatImage(int width, int height, int channels) {
         this.width = width;
+        this.channels = channels;
         rawData = new float[width * height * channels];
     }
 
@@ -26,6 +32,21 @@ public class FloatImage {
     }
 
     public int getHeight() {
-        return rawData.length / width;
+        return rawData.length / width / channels;
+    }
+
+    public float[] getPixel(int x, int y) {
+        int start = coordsToArrayIndex(x, y);
+        return subarray(rawData, start, start + channels);
+    }
+
+    public void setPixel(int x, int y, float[] pixel) {
+        IntStream.range(0, pixel.length).forEach(
+                i -> rawData[coordsToArrayIndex(x, y) + i] = pixel[i]
+        );
+    }
+
+    private int coordsToArrayIndex(int x, int y) {
+        return (x + (y * width)) * channels;
     }
 }
