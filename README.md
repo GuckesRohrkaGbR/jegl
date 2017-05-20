@@ -4,3 +4,5 @@
 [![Quality Gate](https://sonarqube.com/api/badges/gate?key=de.torqdev.jegl:jegl)](https://sonarqube.com/dashboard/index/de.torqdev.jegl:jegl)
 
 JEGL
+
+List of GEGL filters: https://wiki.gimp.org/wiki/Hacking:Porting_filters_to_GEGL#Porting_matrix
