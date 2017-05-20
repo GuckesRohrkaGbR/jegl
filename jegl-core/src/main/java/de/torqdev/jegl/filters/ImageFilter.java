@@ -1,4 +1,6 @@
-package de.torqdev.jegl.core;
+package de.torqdev.jegl.filters;
+
+import de.torqdev.jegl.core.FloatImage;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>

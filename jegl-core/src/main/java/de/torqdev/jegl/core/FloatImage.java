@@ -32,7 +32,13 @@ public class FloatImage {
     }
 
     public int getHeight() {
-        return rawData.length / width / channels;
+        return sizeIsZero() ? 0 : rawData.length / width / channels;
+    }
+
+    private boolean sizeIsZero() {
+        return width == 0
+                || rawData.length == 0
+                || channels == 0;
     }
 
     public float[] getPixel(int x, int y) {
