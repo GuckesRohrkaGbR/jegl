@@ -2,13 +2,17 @@ language: java
 jdk:
 - oraclejdk8
 script:
-- mvn test -Dgpg.skip
-- mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package verify sonar:sonar -Dgpg.skip -Dsonar.login=$SONAR_TOKEN
+  - mvn test -Dgpg.skip
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
 addons:
-  sonarqube: true
+  sonarqube:
+    organization: "guckesrohrkagbr-github"
+    token:
+      secure: "Hn1kzo+LyNWDJRu42NOHJW2IxOL9j6kAu8UyZo5D53HirViaJfLHNZ7DILFi8ehp6btp0fwCqy14ajVGuMCguASxQ9eqbbp5X6eQj6cZ0CrhxCRDE76cTa88Lx0cpK3y5qn3GJ27wDwSUz/r4VCVG88kiVR7EorpS+8ClqdUwL0DnQGTO9t2WS3+QjPa5iQXjbXo7I+EmRDYGVTZXAVyWpv+TRO0UfbhcjWFsrnuWvzGaJ0smlbzIHh3sjcnhQ5+zUv489C0SXvDeVERC/EpswzpC1xTbXgxsxa8Vn/4DnQf19Gy1AlVw8dHH3VgND4Gs1hCMwaza1tj076oAZsvm1hMgsWGs2hnbsFkgVtvUz3zPXrKGdnSZYEcVGhVXUvABqY6OdHMfCjh/3j52yBiJLAWJpWsh04FtyyZrXfpiprKP2eBubow5UgH61oU5Z84KM1iXpYYpxrL8SuteODx90+vfMhFobcucQI2l/8deJRsn7kbkEb2VioWXp4K1aXhL6FZ8G1VbXSIylEnraZagrwYlrqUN9zmY50T1uyr8O322BcMp+h7ByLYzaBXBC9NT3QBz45htPaNuhYtEFwHM5EWcxN1cUPDqNK9Yinj+8J8LXNVcm75MSDNaeDnBZ3FkmD5ruWnHbNtZ0SJ9HLjJet34XH5ZtgRzIjNViSODnw="
   apt:
     packages:
     - oracle-java8-installer
-env:
-  global:
-    secure: Hn1kzo+LyNWDJRu42NOHJW2IxOL9j6kAu8UyZo5D53HirViaJfLHNZ7DILFi8ehp6btp0fwCqy14ajVGuMCguASxQ9eqbbp5X6eQj6cZ0CrhxCRDE76cTa88Lx0cpK3y5qn3GJ27wDwSUz/r4VCVG88kiVR7EorpS+8ClqdUwL0DnQGTO9t2WS3+QjPa5iQXjbXo7I+EmRDYGVTZXAVyWpv+TRO0UfbhcjWFsrnuWvzGaJ0smlbzIHh3sjcnhQ5+zUv489C0SXvDeVERC/EpswzpC1xTbXgxsxa8Vn/4DnQf19Gy1AlVw8dHH3VgND4Gs1hCMwaza1tj076oAZsvm1hMgsWGs2hnbsFkgVtvUz3zPXrKGdnSZYEcVGhVXUvABqY6OdHMfCjh/3j52yBiJLAWJpWsh04FtyyZrXfpiprKP2eBubow5UgH61oU5Z84KM1iXpYYpxrL8SuteODx90+vfMhFobcucQI2l/8deJRsn7kbkEb2VioWXp4K1aXhL6FZ8G1VbXSIylEnraZagrwYlrqUN9zmY50T1uyr8O322BcMp+h7ByLYzaBXBC9NT3QBz45htPaNuhYtEFwHM5EWcxN1cUPDqNK9Yinj+8J8LXNVcm75MSDNaeDnBZ3FkmD5ruWnHbNtZ0SJ9HLjJet34XH5ZtgRzIjNViSODnw=
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
