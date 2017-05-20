@@ -23,11 +23,9 @@ public class BlackAndWhiteFilter implements ImageFilter {
 
     @Override
     public FloatImage processImage(FloatImage image) {
-        IntStream.range(0, image.getHeight()).forEach(y -> {
-            IntStream.range(0, image.getWidth()).forEach(x -> {
-                image.setPixel(x, y, thresholdFilter(image.getPixel(x, y)));
-            });
-        });
+        IntStream.range(0, image.getHeight())
+                .forEach(y -> IntStream.range(0, image.getWidth())
+                        .forEach(x -> image.setPixel(x, y, thresholdFilter(image.getPixel(x, y)))));
         return image;
     }
 

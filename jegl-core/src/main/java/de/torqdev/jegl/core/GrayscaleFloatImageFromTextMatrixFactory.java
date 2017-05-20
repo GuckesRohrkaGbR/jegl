@@ -1,10 +1,5 @@
 package de.torqdev.jegl.core;
 
-import org.apache.commons.lang3.ArrayUtils;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 import static org.apache.commons.lang3.StringUtils.*;
 
 /**
@@ -13,7 +8,7 @@ import static org.apache.commons.lang3.StringUtils.*;
  */
 public class GrayscaleFloatImageFromTextMatrixFactory implements AbstractFloatImageFactory<String> {
     private static final int CHANNELS = 1;
-    private static String WHITESPACE = "\\s+";
+    private static final String WHITESPACE = "\\s+";
 
     public FloatImage createByteImageFrom(String imageSource) {
         int width = getWidthFromString(imageSource);
