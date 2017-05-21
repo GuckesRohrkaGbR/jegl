@@ -23,21 +23,23 @@ public class BlackAndWhiteFilter implements ImageFilter {
 
     @Override
     public FloatImage processImage(FloatImage image) {
-        IntStream.range(0, image.getHeight())
-                .forEach(y -> IntStream.range(0, image.getWidth())
-                        .forEach(x -> image.setPixel(x, y, thresholdFilter(image.getPixel(x, y)))));
+        IntStream.range(0, image.getHeight()).forEach(
+                y -> IntStream.range(0, image.getWidth()).forEach(
+                        x -> image.setPixel(x, y, thresholdFilter(image.getPixel(x, y)))
+                )
+        );
         return image;
     }
 
     private float[] thresholdFilter(float[] color) {
         float avg = average(color);
 
-        return avg < threshold ? blackPixel(color) : whitePixel(color);
+        return (avg < threshold) ? blackPixel(color) : whitePixel(color);
     }
 
     private float average(float[] color) {
         float avg = 0F;
-        for(float value : color) {
+        for (float value : color) {
             avg += value;
         }
         return color.length == 0 ? 0F : avg / color.length;
@@ -52,7 +54,7 @@ public class BlackAndWhiteFilter implements ImageFilter {
     }
 
     private float[] coloredPixel(float[] pixel, float color) {
-        for(int i = 0; i < pixel.length; i++) {
+        for (int i = 0; i < pixel.length; i++) {
             pixel[i] = color;
         }
         return pixel;

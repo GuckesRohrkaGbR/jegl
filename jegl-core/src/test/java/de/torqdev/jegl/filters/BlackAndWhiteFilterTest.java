@@ -13,7 +13,7 @@ import static org.hamcrest.core.Is.is;
  * @version 1.0
  */
 public class BlackAndWhiteFilterTest {
-    private AbstractFloatImageConverter<String> factory = new
+    private AbstractFloatImageConverter<String> converter = new
             GrayscaleFloatImageFromTextMatrixConverter();
     private ImageFilter filter = new BlackAndWhiteFilter();
 
@@ -32,7 +32,7 @@ public class BlackAndWhiteFilterTest {
     @Test
     public void givenOneLightGrayPixelImage_returnsWhiteImage() throws Exception {
         // setup
-        FloatImage image = factory.toFloatImage("0.7");
+        FloatImage image = converter.toFloatImage("0.7");
 
         // execute
         image = filter.processImage(image);
@@ -44,7 +44,7 @@ public class BlackAndWhiteFilterTest {
     @Test
     public void givenOneDarkGrayPixelImage_returnsBlackImage() throws Exception {
         // setup
-        FloatImage image = factory.toFloatImage("0.3");
+        FloatImage image = converter.toFloatImage("0.3");
 
         // execute
         image = filter.processImage(image);

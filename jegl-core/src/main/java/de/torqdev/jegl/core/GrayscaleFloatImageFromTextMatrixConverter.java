@@ -58,3 +58,14 @@ public class GrayscaleFloatImageFromTextMatrixConverter implements AbstractFloat
         return image.toString();
     }
 }
+/*
+1 0 1
+1 0 1
+0 1 0
+ */
+
+/*
+0.8 0.3 0.8
+0.8 0.6 0.8
+0.3 0.8 0.3
+ */
