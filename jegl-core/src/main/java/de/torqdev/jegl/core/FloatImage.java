@@ -55,4 +55,8 @@ public class FloatImage {
     private int coordsToArrayIndex(int x, int y) {
         return (x + (y * width)) * channels;
     }
+
+    public int getChannels() {
+        return channels;
+    }
 }

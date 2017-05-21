@@ -3,6 +3,7 @@ package de.torqdev.jegl.core;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.Is.is;
 
 /**
@@ -10,8 +11,8 @@ import static org.hamcrest.core.Is.is;
  * @version 1.0
  */
 public class GrayscaleGrayscaleFloatImageFromTextMatrixFactoryTest {
-    private AbstractFloatImageFactory<String> factory = new
-            GrayscaleFloatImageFromTextMatrixFactory();
+    private AbstractFloatImageConverter<String> converter = new
+            GrayscaleFloatImageFromTextMatrixConverter();
 
     @Test
     public void givenNoTextInput_createsEmptyImage() throws Exception {
@@ -19,7 +20,7 @@ public class GrayscaleGrayscaleFloatImageFromTextMatrixFactoryTest {
         String imageSource = "";
 
         // execute
-        FloatImage image = factory.createByteImageFrom(imageSource);
+        FloatImage image = converter.toFloatImage(imageSource);
 
         // verify
         assertThat(image.getRawData().length, is(0));
@@ -31,11 +32,23 @@ public class GrayscaleGrayscaleFloatImageFromTextMatrixFactoryTest {
         String imageSource = "0";
 
         // execute
-        FloatImage image = factory.createByteImageFrom(imageSource);
+        FloatImage image = converter.toFloatImage(imageSource);
 
         // verify
         assertThat(image.getRawData().length, is(1));
         assertThat(image.getRawData()[0], is(0F));
+    }
+
+    @Test
+    public void givenAnyInput_createsOneChannelImage() throws Exception {
+        // setup
+        String imageSource = "";
+
+        // execute
+        FloatImage image = converter.toFloatImage(imageSource);
+
+        // verify
+        assertThat(image.getChannels(), is(1));
     }
 
     @Test
@@ -44,7 +57,7 @@ public class GrayscaleGrayscaleFloatImageFromTextMatrixFactoryTest {
         String imageSource = "1";
 
         // execute
-        FloatImage image = factory.createByteImageFrom(imageSource);
+        FloatImage image = converter.toFloatImage(imageSource);
 
         // verify
         assertThat(image.getRawData().length, is(1));
@@ -57,7 +70,7 @@ public class GrayscaleGrayscaleFloatImageFromTextMatrixFactoryTest {
         String imageSource = "0.5";
 
         // execute
-        FloatImage image = factory.createByteImageFrom(imageSource);
+        FloatImage image = converter.toFloatImage(imageSource);
 
         // verify
         assertThat(image.getRawData().length, is(1));
@@ -70,7 +83,7 @@ public class GrayscaleGrayscaleFloatImageFromTextMatrixFactoryTest {
         String imageSource = "1 0";
 
         // execute
-        FloatImage image = factory.createByteImageFrom(imageSource);
+        FloatImage image = converter.toFloatImage(imageSource);
 
         // verify
         assertThat(image.getRawData().length, is(2));
@@ -84,7 +97,7 @@ public class GrayscaleGrayscaleFloatImageFromTextMatrixFactoryTest {
         String imageSource = "1     0";
 
         // execute
-        FloatImage image = factory.createByteImageFrom(imageSource);
+        FloatImage image = converter.toFloatImage(imageSource);
 
         // verify
         assertThat(image.getRawData().length, is(2));
@@ -98,7 +111,7 @@ public class GrayscaleGrayscaleFloatImageFromTextMatrixFactoryTest {
         String imageSource = "1 0\n0 1";
 
         // execute
-        FloatImage image = factory.createByteImageFrom(imageSource);
+        FloatImage image = converter.toFloatImage(imageSource);
 
         // verify
         assertThat(image.getWidth(), is(2));
@@ -110,7 +123,7 @@ public class GrayscaleGrayscaleFloatImageFromTextMatrixFactoryTest {
         String imageSource = "1 0\n0 1";
 
         // execute
-        FloatImage image = factory.createByteImageFrom(imageSource);
+        FloatImage image = converter.toFloatImage(imageSource);
 
         // verify
         assertThat(image.getHeight(), is(2));
@@ -122,7 +135,7 @@ public class GrayscaleGrayscaleFloatImageFromTextMatrixFactoryTest {
         String imageSource = "1 0\n0 1";
 
         // execute
-        FloatImage image = factory.createByteImageFrom(imageSource);
+        FloatImage image = converter.toFloatImage(imageSource);
 
         // verify
         assertThat(image.getRawData().length, is(4));
@@ -130,5 +143,42 @@ public class GrayscaleGrayscaleFloatImageFromTextMatrixFactoryTest {
         assertThat(image.getRawData()[1], is(0F));
         assertThat(image.getRawData()[2], is(0F));
         assertThat(image.getRawData()[3], is(1F));
+    }
+
+    @Test
+    public void given1PixelBlackImage_returnsZeroString() throws Exception {
+        // setup
+        FloatImage image = new FloatImage(1,1, 1);
+
+        // execute
+        String text = converter.fromFloatImage(image);
+
+        // verify
+        assertThat(text, containsString("0.0"));
+    }
+
+    @Test
+    public void given1PixelWhiteImage_returnsOneString() throws Exception {
+        // setup
+        FloatImage image = new FloatImage(1,1, 1);
+        image.setPixel(0, 0, new float[] {1F});
+
+        // execute
+        String text = converter.fromFloatImage(image);
+
+        // verify
+        assertThat(text, containsString("1.0"));
+    }
+
+    @Test
+    public void given3x3Image_returnsThreeLineText() throws Exception {
+        // setup
+        FloatImage image = new FloatImage(3,3, 1);
+
+        // execute
+        String text = converter.fromFloatImage(image);
+
+        // verify
+        assertThat(text.split("\n").length, is(3));
     }
 }

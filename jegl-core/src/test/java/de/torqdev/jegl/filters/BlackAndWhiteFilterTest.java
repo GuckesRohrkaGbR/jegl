@@ -1,8 +1,8 @@
 package de.torqdev.jegl.filters;
 
-import de.torqdev.jegl.core.AbstractFloatImageFactory;
+import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FloatImage;
-import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixFactory;
+import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -13,8 +13,8 @@ import static org.hamcrest.core.Is.is;
  * @version 1.0
  */
 public class BlackAndWhiteFilterTest {
-    private AbstractFloatImageFactory<String> factory = new
-            GrayscaleFloatImageFromTextMatrixFactory();
+    private AbstractFloatImageConverter<String> factory = new
+            GrayscaleFloatImageFromTextMatrixConverter();
     private ImageFilter filter = new BlackAndWhiteFilter();
 
     @Test
@@ -32,7 +32,7 @@ public class BlackAndWhiteFilterTest {
     @Test
     public void givenOneLightGrayPixelImage_returnsWhiteImage() throws Exception {
         // setup
-        FloatImage image = factory.createByteImageFrom("0.7");
+        FloatImage image = factory.toFloatImage("0.7");
 
         // execute
         image = filter.processImage(image);
@@ -44,7 +44,7 @@ public class BlackAndWhiteFilterTest {
     @Test
     public void givenOneDarkGrayPixelImage_returnsBlackImage() throws Exception {
         // setup
-        FloatImage image = factory.createByteImageFrom("0.3");
+        FloatImage image = factory.toFloatImage("0.3");
 
         // execute
         image = filter.processImage(image);
