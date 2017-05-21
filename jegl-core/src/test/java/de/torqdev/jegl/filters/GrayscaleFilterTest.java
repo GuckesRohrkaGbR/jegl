@@ -55,6 +55,7 @@ public class GrayscaleFilterTest {
         image = filter.processImage(image);
 
         // verify
-        //assertThat(image.getRawData()[0], is(0.07F));
+        // assertThat(image.getRawData()[0], is(0.07F));
+        // Formel: https://www.johndcook.com/blog/2009/08/24/algorithms-convert-color-grayscale/
     }
 }
