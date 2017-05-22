@@ -5,8 +5,6 @@ import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
 import org.junit.Test;
 
-import java.util.Arrays;
-
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.core.Is.*;
 

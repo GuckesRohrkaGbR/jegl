@@ -10,7 +10,7 @@ import static org.hamcrest.core.Is.is;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class GrayscaleFloatImageFromTextMatrixFactoryTest {
+public class GrayscaleFloatImageFromTextMatrixConverterTest {
     private AbstractFloatImageConverter<String> converter = new
             GrayscaleFloatImageFromTextMatrixConverter();
 

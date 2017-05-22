@@ -92,10 +92,12 @@ public class SideBySideView {
     private void openFileDialog() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.showOpenDialog(frame.getContentPane());
-        try {
-            originalImage = ImageIO.read(fileChooser.getSelectedFile());
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(fileChooser.getSelectedFile() != null) {
+            try {
+                originalImage = ImageIO.read(fileChooser.getSelectedFile());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         displayImages();
@@ -124,7 +126,7 @@ public class SideBySideView {
 
         ImageFilter filter = filterChooser.getItemAt(filterChooser.getSelectedIndex());
         if (filter != null) {
-            BufferedImage transformed = new BufferedImage(originalImage.getWidth(), originalImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+            BufferedImage transformed = new BufferedImage(originalImage.getWidth(), originalImage.getHeight(), BufferedImage.TYPE_INT_RGB);
             Graphics2D g = transformed.createGraphics();
             g.drawImage(originalImage, 0, 0, null);
             g.dispose();

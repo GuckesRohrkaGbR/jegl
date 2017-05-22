@@ -2,6 +2,7 @@ package de.torqdev.jegl.core;
 
 import java.util.stream.IntStream;
 
+import static java.lang.Math.*;
 import static org.apache.commons.lang3.ArrayUtils.subarray;
 
 /**
@@ -60,5 +61,11 @@ public class FloatImage {
 
     public int getChannels() {
         return channels;
+    }
+
+    public float[] getCappedPixel(int x, int y) {
+        x = max(0, min(getWidth() - 1, x));
+        y = max(0, min(getHeight() - 1, y));
+        return getPixel(x, y);
     }
 }
