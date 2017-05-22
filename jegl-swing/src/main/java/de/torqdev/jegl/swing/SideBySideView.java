@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
 
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.PAGE_START;
@@ -26,12 +27,15 @@ public class SideBySideView {
     private JPanel previewImagePanel = new JPanel();
     private JLabel originalLabel = new JLabel();
     private JLabel previewLabel = new JLabel();
-    private BufferedImage originalImage;
+    private BufferedImage originalImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
     private JComboBox<ImageFilter> filterChooser = new JComboBox<>();
 
     private SideBySideView() {
         try {
-            originalImage = ImageIO.read(this.getClass().getClassLoader().getResource("images/buildings.jpg"));
+            URL url = this.getClass().getClassLoader().getResource("images/buildings.jpg");
+            if(url != null) {
+                originalImage = ImageIO.read(url);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

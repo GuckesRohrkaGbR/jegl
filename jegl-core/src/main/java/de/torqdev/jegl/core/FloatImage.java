@@ -5,6 +5,8 @@ import java.util.stream.IntStream;
 import static org.apache.commons.lang3.ArrayUtils.subarray;
 
 /**
+ * Image representation in ARGB format.
+ *
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
