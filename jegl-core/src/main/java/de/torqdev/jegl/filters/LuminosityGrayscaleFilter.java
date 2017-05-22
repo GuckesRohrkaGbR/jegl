@@ -8,7 +8,7 @@ import org.kohsuke.MetaInfServices;
  * @version 1.0
  */
 @MetaInfServices
-public class GrayscaleFilter implements ImageFilter {
+public class LuminosityGrayscaleFilter implements ImageFilter {
     @Override
     public FloatImage processImage(FloatImage image) {
         return new FloatImage(image.getWidth(), image.getHeight(), 1);

@@ -10,8 +10,8 @@ import static org.hamcrest.core.Is.is;
  * @author <a href="mailto:jonas.egert@torq-dev.de">Jonas Egert</a>
  * @version 1.0
  */
-public class GrayscaleFilterTest {
-    private ImageFilter filter = new GrayscaleFilter();
+public class LuminosityGrayscaleFilterTest {
+    private ImageFilter filter = new LuminosityGrayscaleFilter();
 
     @Test
     public void givenEmptyImage_returnsEmptyImage() throws Exception {
