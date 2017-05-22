@@ -7,9 +7,7 @@ import org.junit.Test;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-import static java.awt.image.BufferedImage.TYPE_BYTE_GRAY;
-import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
-import static java.awt.image.BufferedImage.TYPE_INT_RGB;
+import static java.awt.image.BufferedImage.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 

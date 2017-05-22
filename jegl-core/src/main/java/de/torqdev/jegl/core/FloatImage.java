@@ -2,7 +2,7 @@ package de.torqdev.jegl.core;
 
 import java.util.stream.IntStream;
 
-import static org.apache.commons.lang3.ArrayUtils.*;
+import static org.apache.commons.lang3.ArrayUtils.subarray;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>

@@ -140,5 +140,6 @@
     <modules>
         <module>jegl-core</module>
         <module>jegl-awt</module>
+        <module>jegl-swing</module>
     </modules>
 </project>
