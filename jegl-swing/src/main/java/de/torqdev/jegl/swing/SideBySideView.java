@@ -2,6 +2,7 @@ package de.torqdev.jegl.swing;
 
 import de.torqdev.jegl.awt.FloatImageFromBufferedImageConverter;
 import de.torqdev.jegl.core.AbstractFloatImageConverter;
+import de.torqdev.jegl.core.FilterUtil;
 import de.torqdev.jegl.filters.ImageFilter;
 
 import javax.imageio.ImageIO;
@@ -28,7 +29,7 @@ public class SideBySideView {
     private BufferedImage originalImage;
     private JComboBox<ImageFilter> filterChooser = new JComboBox<>();
 
-    public SideBySideView() {
+    private SideBySideView() {
         try {
             originalImage = ImageIO.read(this.getClass().getClassLoader().getResource("images/buildings.jpg"));
         } catch (IOException e) {
@@ -97,6 +98,9 @@ public class SideBySideView {
     }
 
     private Component createFilterChooser() {
+        filterChooser.setModel(getComboBoxModel());
+        filterChooser.addItemListener(e -> this.displayImages());
+        filterChooser.setRenderer(new ClassListCellRenderer());
         return filterChooser;
     }
 
@@ -110,15 +114,33 @@ public class SideBySideView {
         return corePanel;
     }
 
-    public BufferedImage getPreviewImage() {
+    private BufferedImage getPreviewImage() {
         AbstractFloatImageConverter<BufferedImage> converter = new FloatImageFromBufferedImageConverter();
         BufferedImage previewImage = originalImage;
 
         ImageFilter filter = filterChooser.getItemAt(filterChooser.getSelectedIndex());
         if (filter != null) {
-            previewImage = converter.fromFloatImage(filter.processImage(converter.toFloatImage(previewImage)));
+            BufferedImage transformed = new BufferedImage(originalImage.getWidth(), originalImage.getHeight(), BufferedImage.TYPE_INT_RGB);
+            Graphics2D g = transformed.createGraphics();
+            g.drawImage(originalImage, 0, 0, null);
+            g.dispose();
+            previewImage = converter.fromFloatImage(filter.processImage(converter.toFloatImage(transformed)));
         }
 
         return previewImage;
+    }
+
+    private ComboBoxModel<ImageFilter> getComboBoxModel() {
+        ImageFilter[] filters = FilterUtil.getAllFilters().toArray(new ImageFilter[]{});
+        return new DefaultComboBoxModel<>(filters);
+    }
+
+    private class ClassListCellRenderer extends DefaultListCellRenderer {
+        @Override
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            JLabel myReturn = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            myReturn.setText(value.getClass().getSimpleName());
+            return myReturn;
+        }
     }
 }
