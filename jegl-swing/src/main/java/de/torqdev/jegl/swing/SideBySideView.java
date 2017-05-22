@@ -124,7 +124,7 @@ public class SideBySideView {
 
         ImageFilter filter = filterChooser.getItemAt(filterChooser.getSelectedIndex());
         if (filter != null) {
-            BufferedImage transformed = new BufferedImage(originalImage.getWidth(), originalImage.getHeight(), BufferedImage.TYPE_INT_RGB);
+            BufferedImage transformed = new BufferedImage(originalImage.getWidth(), originalImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
             Graphics2D g = transformed.createGraphics();
             g.drawImage(originalImage, 0, 0, null);
             g.dispose();
