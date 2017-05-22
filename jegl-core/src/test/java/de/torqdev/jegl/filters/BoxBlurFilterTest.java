@@ -112,7 +112,6 @@ public class BoxBlurFilterTest {
 
         // execute
         image = filter.processImage(image);
-        System.out.println(Arrays.toString(image.getRawData()));
 
         // verify
         assertThat(image.getRawData()[0], is(0.2F));
