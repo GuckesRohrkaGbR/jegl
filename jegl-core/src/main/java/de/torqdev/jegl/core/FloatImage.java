@@ -68,8 +68,4 @@ public class FloatImage {
         y = max(0, min(getHeight() - 1, y));
         return getPixel(x, y);
     }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
 }
