@@ -13,7 +13,6 @@ import static java.lang.Math.sqrt;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-// TODO: test you moron
 @MetaInfServices
 public class SobelEdgeDetectionFilter implements ImageFilter {
     private static final ImageFilter verticalSobel = new SobelVerticalEdgeDetectionFilter();
