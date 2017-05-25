@@ -17,5 +17,11 @@
             <artifactId>jegl-awt</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-swing-junit</artifactId>
+            <version>3.6.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

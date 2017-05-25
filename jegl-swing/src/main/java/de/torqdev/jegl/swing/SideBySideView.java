@@ -15,14 +15,12 @@ import java.net.URL;
 import static java.awt.BorderLayout.CENTER;
 import static java.awt.BorderLayout.PAGE_START;
 import static javax.swing.BoxLayout.X_AXIS;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class SideBySideView {
-    private JFrame frame;
+public class SideBySideView extends JFrame {
     private JPanel originalImagePanel = new JPanel();
     private JPanel previewImagePanel = new JPanel();
     private JLabel originalLabel = new JLabel();
@@ -30,28 +28,29 @@ public class SideBySideView {
     private BufferedImage originalImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
     private JComboBox<ImageFilter> filterChooser = new JComboBox<>();
 
-    private SideBySideView() {
+    protected SideBySideView() {
+        super("SideBySideView");
         try {
-            URL url = this.getClass().getClassLoader().getResource("images/buildings.jpg");
+            URL url = this.getClass().getClassLoader().getResource("images/hourglass.png");
             if(url != null) {
                 originalImage = ImageIO.read(url);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        frame = new JFrame("SideBySideView");
+        this.display();
     }
 
     public static void main(String[] args) {
         SideBySideView window = new SideBySideView();
-        window.show();
+        window.display();
     }
 
-    private void show() {
+    public void display() {
         fillFrame();
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.pack();
+        this.setVisible(true);
         displayImages();
     }
 
@@ -62,7 +61,7 @@ public class SideBySideView {
 
     private void fillFrame() {
         JPanel panel = createMainPanel();
-        frame.getContentPane().add(panel);
+        this.getContentPane().add(panel);
     }
 
     private JPanel createMainPanel() {
@@ -91,7 +90,7 @@ public class SideBySideView {
 
     private void openFileDialog() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.showOpenDialog(frame.getContentPane());
+        fileChooser.showOpenDialog(this.getContentPane());
         if(fileChooser.getSelectedFile() != null) {
             try {
                 originalImage = ImageIO.read(fileChooser.getSelectedFile());
