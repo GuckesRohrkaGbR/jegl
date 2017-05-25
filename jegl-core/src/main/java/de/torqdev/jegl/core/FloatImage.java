@@ -14,7 +14,7 @@ import static org.apache.commons.lang3.ArrayUtils.subarray;
 public class FloatImage {
     private final int channels;
     private float[] rawData;
-    private final int width;
+    private int width;
 
     public FloatImage(int width, int height, int channels) {
         this.width = width;
@@ -67,5 +67,9 @@ public class FloatImage {
         x = max(0, min(getWidth() - 1, x));
         y = max(0, min(getHeight() - 1, y));
         return getPixel(x, y);
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
     }
 }
