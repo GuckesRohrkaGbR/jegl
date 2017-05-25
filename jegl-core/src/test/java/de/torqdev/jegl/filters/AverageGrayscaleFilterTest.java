@@ -24,6 +24,19 @@ public class AverageGrayscaleFilterTest {
     }
 
     @Test
+    public void givenGrayscaleImage_returnsTheImageItself() throws Exception {
+        // setup
+        FloatImage image = new FloatImage(1, 1, 1);
+        image.setRawData(new float[] {0.3F});
+
+        // execute
+        image = filter.processImage(image);
+
+        // verify
+        assertThat(image.getRawData()[0], is(0.3F));
+    }
+
+    @Test
     public void givenThreeChannelImage_returnsOneChannelImage() throws Exception {
         // setup
         FloatImage image = new FloatImage(0, 0, 3);

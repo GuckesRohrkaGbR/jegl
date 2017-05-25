@@ -17,6 +17,10 @@ public class AverageGrayscaleFilter implements ImageFilter {
     }
 
     private FloatImage grayScale(FloatImage image) {
+        if(image.getChannels() == 1) {
+            return image;
+        }
+
         FloatImage gray = new FloatImage(image.getWidth(), image.getHeight(), 1);
         float[] grayData = gray.getRawData();
         IntStream.range(0, grayData.length).forEach(
