@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.beans.Transient;
 import java.io.IOException;
 import java.net.URL;
 
@@ -25,7 +26,7 @@ public class SideBySideView extends JFrame {
     private JPanel previewImagePanel = new JPanel();
     private JLabel originalLabel = new JLabel();
     private JLabel previewLabel = new JLabel();
-    private BufferedImage originalImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+    private transient BufferedImage originalImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
     private JComboBox<ImageFilter> filterChooser = new JComboBox<>();
 
     protected SideBySideView() {
