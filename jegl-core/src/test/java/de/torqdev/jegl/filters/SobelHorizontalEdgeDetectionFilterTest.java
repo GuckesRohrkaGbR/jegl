@@ -57,7 +57,7 @@ public class SobelHorizontalEdgeDetectionFilterTest {
     }
 
     @Test
-    public void givenOneBlackPixelImage_returnsZeroPixel() throws Exception {
+    public void givenOneBlackPixelImage_returnsGrayPixel() throws Exception {
         // setup
         FloatImage image = converter.toFloatImage("0");
 
@@ -65,11 +65,11 @@ public class SobelHorizontalEdgeDetectionFilterTest {
         image = filter.processImage(image);
 
         // verify
-        assertThat(image.getRawData()[0], is(0F));
+        assertThat(image.getRawData()[0], is(0.5F));
     }
 
     @Test
-    public void givenOneWhitePixelImage_returnsZeroPixel() throws Exception {
+    public void givenOneWhitePixelImage_returnsGrayPixel() throws Exception {
         // setup
         FloatImage image = converter.toFloatImage("1");
 
@@ -77,11 +77,11 @@ public class SobelHorizontalEdgeDetectionFilterTest {
         image = filter.processImage(image);
 
         // verify
-        assertThat(image.getRawData()[0], is(0F));
+        assertThat(image.getRawData()[0], is(0.5F));
     }
 
     @Test
-    public void givenAnyOnePixelImage_returnsZeroPixel() throws Exception {
+    public void givenAnyOnePixelImage_returnsGrayPixel() throws Exception {
         // setup
         FloatImage image = converter.toFloatImage("0.6");
 
@@ -89,7 +89,7 @@ public class SobelHorizontalEdgeDetectionFilterTest {
         image = filter.processImage(image);
 
         // verify
-        assertThat(image.getRawData()[0], is(0F));
+        assertThat(image.getRawData()[0], is(0.5F));
     }
 
     @Test
@@ -101,7 +101,8 @@ public class SobelHorizontalEdgeDetectionFilterTest {
         image = filter.processImage(image);
 
         // verify
-        FloatImage expected = converter.toFloatImage("0 0 0\n0 0 0\n1 1 1");
+        FloatImage expected = converter.toFloatImage("0 0 0\n0.5 0.5 0.5\n1 1 1");
+        System.out.println(converter.fromFloatImage(image));
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
 
@@ -114,7 +115,8 @@ public class SobelHorizontalEdgeDetectionFilterTest {
         image = filter.processImage(image);
 
         // verify
-        FloatImage expected = converter.toFloatImage("0 0 0\n0 0 0\n0 0 0");
+        FloatImage expected = converter.toFloatImage("0.5 0.5 0.5\n0.5 0.5 0.5\n0.5 0.5 0.5");
+        System.out.println(converter.fromFloatImage(image));
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
 }

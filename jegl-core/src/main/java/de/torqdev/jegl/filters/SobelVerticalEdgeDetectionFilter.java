@@ -56,7 +56,7 @@ public class SobelVerticalEdgeDetectionFilter implements ImageFilter {
     }
 
     private float normalize(float value) {
-        return max(0F, min(1F, value));
+        return (max(-1F, min(1F, value)) + 1F) / 2F;
     }
 
     private float[] getArrayWithSameChannelsAs(int x, int y, FloatImage image) {
