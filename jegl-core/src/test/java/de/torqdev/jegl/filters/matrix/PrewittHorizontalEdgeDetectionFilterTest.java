@@ -101,6 +101,7 @@ public class PrewittHorizontalEdgeDetectionFilterTest {
         image = filter.processImage(image);
 
         // verify
+        System.out.println(converter.fromFloatImage(image));
         FloatImage expected = converter.toFloatImage("1 1 1\n0.5 0.5 0.5\n0 0 0");
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
