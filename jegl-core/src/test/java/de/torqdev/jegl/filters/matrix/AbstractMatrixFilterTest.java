@@ -15,11 +15,11 @@ import static org.junit.Assert.*;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public abstract class AbstractBlurFilterTest extends AbstractSameSizeImageFilterTest {
+public abstract class AbstractMatrixFilterTest extends AbstractSameSizeImageFilterTest {
     protected static final AbstractFloatImageConverter<String> CONVERTER = new
             GrayscaleFloatImageFromTextMatrixConverter();
 
-    protected AbstractBlurFilterTest(ImageFilter filter) {
+    protected AbstractMatrixFilterTest(ImageFilter filter) {
         super(filter);
     }
 
