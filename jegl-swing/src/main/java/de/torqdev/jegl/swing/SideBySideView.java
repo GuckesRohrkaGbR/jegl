@@ -9,13 +9,11 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.beans.Transient;
 import java.io.IOException;
 import java.net.URL;
 
-import static java.awt.BorderLayout.CENTER;
-import static java.awt.BorderLayout.PAGE_START;
-import static javax.swing.BoxLayout.X_AXIS;
+import static java.awt.BorderLayout.*;
+import static javax.swing.BoxLayout.*;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
@@ -26,14 +24,15 @@ public class SideBySideView extends JFrame {
     private JPanel previewImagePanel = new JPanel();
     private JLabel originalLabel = new JLabel();
     private JLabel previewLabel = new JLabel();
-    private transient BufferedImage originalImage = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+    private transient BufferedImage originalImage = new BufferedImage(1, 1,
+                                                                      BufferedImage.TYPE_INT_ARGB);
     private JComboBox<ImageFilter> filterChooser = new JComboBox<>();
 
     protected SideBySideView() {
         super("SideBySideView");
         try {
             URL url = this.getClass().getClassLoader().getResource("images/hourglass.png");
-            if(url != null) {
+            if (url != null) {
                 originalImage = ImageIO.read(url);
             }
         } catch (IOException e) {
@@ -43,7 +42,7 @@ public class SideBySideView extends JFrame {
     }
 
     public static void main(String[] args) {
-        SideBySideView window = new SideBySideView();
+        new SideBySideView();
     }
 
     public void display() {
@@ -91,7 +90,7 @@ public class SideBySideView extends JFrame {
     private void openFileDialog() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.showOpenDialog(this.getContentPane());
-        if(fileChooser.getSelectedFile() != null) {
+        if (fileChooser.getSelectedFile() != null) {
             try {
                 originalImage = ImageIO.read(fileChooser.getSelectedFile());
             } catch (IOException e) {
@@ -120,16 +119,20 @@ public class SideBySideView extends JFrame {
     }
 
     private BufferedImage getPreviewImage() {
-        AbstractFloatImageConverter<BufferedImage> converter = new FloatImageFromBufferedImageConverter();
+        AbstractFloatImageConverter<BufferedImage> converter = new
+                FloatImageFromBufferedImageConverter();
         BufferedImage previewImage = originalImage;
 
         ImageFilter filter = filterChooser.getItemAt(filterChooser.getSelectedIndex());
         if (filter != null) {
-            BufferedImage transformed = new BufferedImage(originalImage.getWidth(), originalImage.getHeight(), BufferedImage.TYPE_INT_RGB);
+            BufferedImage transformed = new BufferedImage(originalImage.getWidth(),
+                                                          originalImage.getHeight(),
+                                                          BufferedImage.TYPE_INT_RGB);
             Graphics2D g = transformed.createGraphics();
             g.drawImage(originalImage, 0, 0, null);
             g.dispose();
-            previewImage = converter.fromFloatImage(filter.processImage(converter.toFloatImage(transformed)));
+            previewImage = converter.fromFloatImage(
+                    filter.processImage(converter.toFloatImage(transformed)));
         }
 
         return previewImage;
@@ -142,8 +145,10 @@ public class SideBySideView extends JFrame {
 
     private class ClassListCellRenderer extends DefaultListCellRenderer {
         @Override
-        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            JLabel myReturn = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index,
+                                                      boolean isSelected, boolean cellHasFocus) {
+            JLabel myReturn = (JLabel) super.getListCellRendererComponent(list, value, index,
+                                                                          isSelected, cellHasFocus);
             myReturn.setText(value.getClass().getSimpleName());
             return myReturn;
         }
