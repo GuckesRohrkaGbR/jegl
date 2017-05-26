@@ -9,8 +9,8 @@ import org.kohsuke.MetaInfServices;
  */
 @MetaInfServices(value = ImageFilter.class)
 public class ReliefFilter extends AbstractMatrixFilter {
-    private static final float[] MATRIX = new float[] {
-        // @formatter:off
+    private static final float[] MATRIX = new float[]{
+            // @formatter:off
         -2, -1, 0,
         -1, 1, 1,
         0, 1, 2

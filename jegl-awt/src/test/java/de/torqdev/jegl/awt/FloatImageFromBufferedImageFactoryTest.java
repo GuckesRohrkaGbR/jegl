@@ -8,15 +8,16 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import static java.awt.image.BufferedImage.*;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.core.Is.*;
+import static org.junit.Assert.*;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
 public class FloatImageFromBufferedImageFactoryTest {
-    AbstractFloatImageConverter<BufferedImage> converter = new FloatImageFromBufferedImageConverter();
+    AbstractFloatImageConverter<BufferedImage> converter = new
+            FloatImageFromBufferedImageConverter();
 
     @Test
     public void givenBlack3ChannelBufferedImage_returnsBlackFloatImage() throws Exception {
@@ -119,7 +120,7 @@ public class FloatImageFromBufferedImageFactoryTest {
     @Test(expected = UnsupportedOperationException.class)
     public void givenUnsupportedChannelImage_throwsException() throws Exception {
         // setup
-        FloatImage image = new FloatImage(1,1,2);
+        FloatImage image = new FloatImage(1, 1, 2);
 
         // execute + verify
         converter.fromFloatImage(image);

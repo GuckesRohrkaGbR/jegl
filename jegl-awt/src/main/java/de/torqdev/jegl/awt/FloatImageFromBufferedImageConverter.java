@@ -16,7 +16,8 @@ import static java.awt.image.BufferedImage.*;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class FloatImageFromBufferedImageConverter implements AbstractFloatImageConverter<BufferedImage> {
+public class FloatImageFromBufferedImageConverter
+        implements AbstractFloatImageConverter<BufferedImage> {
     @Override
     public FloatImage toFloatImage(BufferedImage bi) {
         int[] pixels = getPixelArrayFromBufferedImage(bi);
@@ -39,7 +40,8 @@ public class FloatImageFromBufferedImageConverter implements AbstractFloatImageC
         float[] myReturn = new float[pixels.length * channels];
         for (int i = 0; i < pixels.length; i++) {
             for (int channel = 0; channel < channels; channel++) {
-                myReturn[i * channels + channel] = getFloatColorFromChannel(pixels[i], channel, channels);
+                myReturn[i * channels + channel] = getFloatColorFromChannel(pixels[i], channel,
+                                                                            channels);
             }
         }
         return myReturn;
@@ -52,7 +54,8 @@ public class FloatImageFromBufferedImageConverter implements AbstractFloatImageC
 
     @Override
     public BufferedImage fromFloatImage(FloatImage floatImage) {
-        BufferedImage image = new BufferedImage(floatImage.getWidth(), floatImage.getHeight(), getTypeFrom(floatImage));
+        BufferedImage image = new BufferedImage(floatImage.getWidth(), floatImage.getHeight(),
+                                                getTypeFrom(floatImage));
         writePixelsToImage(floatImage, image);
         return image;
     }
@@ -60,9 +63,7 @@ public class FloatImageFromBufferedImageConverter implements AbstractFloatImageC
     private void writePixelsToImage(FloatImage orig, BufferedImage image) {
         IntStream.range(0, image.getHeight()).forEach(
                 y -> IntStream.range(0, image.getWidth()).forEach(
-                        x -> image.setRGB(x, y, getColorFrom(orig.getPixel(x, y)))
-                )
-        );
+                        x -> image.setRGB(x, y, getColorFrom(orig.getPixel(x, y)))));
     }
 
     private int getColorFrom(float[] pixel) {

@@ -4,6 +4,7 @@ import de.torqdev.jegl.awt.FloatImageFromBufferedImageConverter;
 import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FilterUtil;
 import de.torqdev.jegl.filters.ImageFilter;
+import org.apache.log4j.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,7 +12,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
-import org.apache.log4j.Logger;
 
 import static java.awt.BorderLayout.*;
 import static javax.swing.BoxLayout.*;

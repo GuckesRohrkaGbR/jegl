@@ -8,11 +8,7 @@ import org.kohsuke.MetaInfServices;
  */
 @MetaInfServices(value = ImageFilter.class)
 public class ScharrVerticalEdgeDetectionFilter extends AbstractEdgeDetectorFilter {
-    private static final float[] scharrOperator = new float[]{
-            3, 0, -3,
-            10, 0, -10,
-            3, 0, -3
-    };
+    private static final float[] scharrOperator = new float[]{3, 0, -3, 10, 0, -10, 3, 0, -3};
     private static final float factor = 1F;
 
     public ScharrVerticalEdgeDetectionFilter() {

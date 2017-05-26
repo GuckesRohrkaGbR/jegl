@@ -9,7 +9,7 @@ import org.kohsuke.MetaInfServices;
  */
 @MetaInfServices(value = ImageFilter.class)
 public class SharpenFilter extends AbstractMatrixFilter {
-    private static final float[] MATRIX = new float[] {
+    private static final float[] MATRIX = new float[]{
             // @formatter:off
             0, -1, 0,
             -1, 5, -1,

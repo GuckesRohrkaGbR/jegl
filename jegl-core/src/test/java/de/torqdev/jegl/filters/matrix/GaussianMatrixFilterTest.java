@@ -64,7 +64,7 @@ public class GaussianMatrixFilterTest extends AbstractMatrixFilterTest {
 
         // verify
         assertTrue(Arrays.equals(image.getRawData(), new float[]{
-                // @formatter:off
+                                         // @formatter:off
                 0.2F, 3 / 4F, 3 / 4F, 5 / 8F,
                 0.4F, 3 / 4F, 1 / 4F, 3 / 8F,
                 0.6F, 1 / 4F, 3 / 4F, 3 / 8F,

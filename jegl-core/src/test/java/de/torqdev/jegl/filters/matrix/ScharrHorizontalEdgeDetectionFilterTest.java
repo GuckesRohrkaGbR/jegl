@@ -5,8 +5,8 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.core.Is.*;
+import static org.junit.Assert.*;
 
 /**
  * Created by <a href="mailto:jonas.egert@torq-dev.de 26.05.17.
@@ -27,7 +27,7 @@ public class ScharrHorizontalEdgeDetectionFilterTest extends AbstractEdgeDetecti
         // verify
         /*System.out.println(CONVERTER.fromFloatImage(image)); */
         FloatImage expected = CONVERTER.toFloatImage("0 0 0\n0.5 0.5 0.5\n1 1 1");
-        assertThat(Arrays.equals(image.getRawData(),expected.getRawData()), is(true));
+        assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
 
     @Test
@@ -40,6 +40,6 @@ public class ScharrHorizontalEdgeDetectionFilterTest extends AbstractEdgeDetecti
 
         // verify
         FloatImage expected = CONVERTER.toFloatImage("0.5 0.5 0.5\n0.5 0.5 0.5\n0.5 0.5 0.5");
-        assertThat(Arrays.equals(image.getRawData(),expected.getRawData()), is(true));
+        assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
 }
