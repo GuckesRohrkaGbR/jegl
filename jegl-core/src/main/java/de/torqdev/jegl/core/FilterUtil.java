@@ -3,7 +3,6 @@ package de.torqdev.jegl.core;
 import de.torqdev.jegl.filters.ImageFilter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.ServiceLoader;
 
