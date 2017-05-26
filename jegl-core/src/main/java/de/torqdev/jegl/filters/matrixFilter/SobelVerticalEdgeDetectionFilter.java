@@ -1,23 +1,26 @@
-package de.torqdev.jegl.filters;
+package de.torqdev.jegl.filters.matrixFilter;
 
 import de.torqdev.jegl.core.FloatImage;
+import de.torqdev.jegl.filters.ImageFilter;
 import de.torqdev.jegl.filters.grayscale.AverageGrayscaleFilter;
 import org.kohsuke.MetaInfServices;
 
 import java.util.stream.IntStream;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
+import static java.lang.Math.*;
 
 /**
- * Created by jonas on 26.05.17.
+ * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
+ * @version 1.0
  */
 @MetaInfServices
-public class PrewittHorizontalEdgeDetectionFilter implements ImageFilter{
-    private static final float[] prewittOperator = new float[]{
-            -1, -1, -1,
-            0, 0, 0,
-            1, 1, 1
+public class SobelVerticalEdgeDetectionFilter implements ImageFilter {
+    private static final float[] sobelOperator = new float[]{
+            // @formatter:off
+            1, 0, -1,
+            2, 0, -2,
+            1, 0, -1,
+            // @formatter:on
     };
     private static final float factor = 1F;
 
@@ -29,14 +32,14 @@ public class PrewittHorizontalEdgeDetectionFilter implements ImageFilter{
     }
 
     private FloatImage applySobel(FloatImage image) {
-        FloatImage prewittImage = new FloatImage(image.getWidth(), image.getHeight(),
-                image.getChannels());
+        FloatImage sobelImage = new FloatImage(image.getWidth(), image.getHeight(),
+                                            image.getChannels());
 
         IntStream.range(0, image.getHeight()).forEach(
                 y -> IntStream.range(0, image.getWidth()).forEach(
-                        x -> prewittImage.setPixel(x, y, calculatePixel(x, y, image))));
+                        x -> sobelImage.setPixel(x, y, calculatePixel(x, y, image))));
 
-        return prewittImage;
+        return sobelImage;
     }
 
     private float[] calculatePixel(int x, int y, FloatImage image) {
@@ -46,8 +49,8 @@ public class PrewittHorizontalEdgeDetectionFilter implements ImageFilter{
         IntStream.range(-1, 2).forEach(matrixY -> IntStream.range(-1, 2).forEach(
                 matrixX -> IntStream.range(channels == 4 ? 1 : 0, channels).forEach(
                         channel -> newPixel[channel] += image.getCappedPixel(x + matrixX,
-                                y + matrixY)
-                                [channel] * prewittOperator[(matrixX + 1) + (matrixY + 1) * 3])));
+                                                                             y + matrixY)
+                                [channel] * sobelOperator[(matrixX + 1) + (matrixY + 1) * 3])));
 
         IntStream.range(channels == 4 ? 1 : 0, channels).forEach(
                 channel -> newPixel[channel] = normalize(newPixel[channel] *= factor));

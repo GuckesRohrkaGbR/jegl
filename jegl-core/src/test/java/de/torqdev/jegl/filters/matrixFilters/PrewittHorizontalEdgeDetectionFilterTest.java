@@ -1,8 +1,10 @@
-package de.torqdev.jegl.filters;
+package de.torqdev.jegl.filters.matrixFilters;
 
 import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
+import de.torqdev.jegl.filters.ImageFilter;
+import de.torqdev.jegl.filters.matrixFilter.PrewittHorizontalEdgeDetectionFilter;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -11,13 +13,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
 /**
- * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
- * @version 1.0
+ * Created by jonas on 26.05.17.
  */
-public class SobelVerticalEdgeDetectionFilterTest {
+public class PrewittHorizontalEdgeDetectionFilterTest {
     private AbstractFloatImageConverter<String> converter = new
             GrayscaleFloatImageFromTextMatrixConverter();
-    private ImageFilter filter = new SobelVerticalEdgeDetectionFilter();
+    private ImageFilter filter = new PrewittHorizontalEdgeDetectionFilter();
 
     @Test
     public void givenEmptyImage_returnsEmptyImage() throws Exception {
@@ -93,22 +94,22 @@ public class SobelVerticalEdgeDetectionFilterTest {
     }
 
     @Test
-    public void givenImageWithVerticalEdge_marksEdge() throws Exception {
+    public void givenImageWithHorizontalEdge_marksEdge() throws Exception {
         // setup
-        FloatImage image = converter.toFloatImage("0 1 0\n0 1 0\n0 1 0");
+        FloatImage image = converter.toFloatImage("0 0 0\n1 1 1\n0 0 0");
 
         // execute
         image = filter.processImage(image);
 
         // verify
-        FloatImage expected = converter.toFloatImage("0 0.5 1\n0 0.5 1\n0 0.5 1");
+        FloatImage expected = converter.toFloatImage("1 1 1\n0.5 0.5 0.5\n0 0 0");
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
 
     @Test
-    public void givenImageWithHorizontalEdge_findsNothing() throws Exception {
+    public void givenImageWithVerticalEdge_findsNothing() throws Exception {
         // setup
-        FloatImage image = converter.toFloatImage("0 0 0\n1 1 1\n0 0 0");
+        FloatImage image = converter.toFloatImage("0 1 0\n0 1 0\n0 1 0");
 
         // execute
         image = filter.processImage(image);
@@ -117,4 +118,5 @@ public class SobelVerticalEdgeDetectionFilterTest {
         FloatImage expected = converter.toFloatImage("0.5 0.5 0.5\n0.5 0.5 0.5\n0.5 0.5 0.5");
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
+
 }

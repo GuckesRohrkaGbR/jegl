@@ -21,7 +21,7 @@ public class GrayscaleFloatImageFromTextMatrixConverter implements AbstractFloat
 
     private int getWidthFromString(String imageSource) {
         return imageSource
-                .split(System.lineSeparator())[0]
+                .split("\n")[0]
                 .split(WHITESPACE)
                 .length;
     }
@@ -58,14 +58,3 @@ public class GrayscaleFloatImageFromTextMatrixConverter implements AbstractFloat
         return image.toString();
     }
 }
-/*
-1 0 1
-1 0 1
-0 1 0
- */
-
-/*
-0.8 0.3 0.8
-0.8 0.6 0.8
-0.3 0.8 0.3
- */

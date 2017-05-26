@@ -1,23 +1,27 @@
-package de.torqdev.jegl.filters;
+package de.torqdev.jegl.filters.matrixFilters;
 
 import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
+import de.torqdev.jegl.filters.ImageFilter;
+import de.torqdev.jegl.filters.matrixFilter.SobelEdgeDetectionFilter;
 import org.junit.Test;
 
 import java.util.Arrays;
 
+import static java.lang.Math.sqrt;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
 
 /**
- * Created by jonas on 26.05.17.
+ * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
+ * @version 1.0
  */
-public class PrewittHorizontalEdgeDetectionFilterTest {
-    private AbstractFloatImageConverter<String> converter = new
+public class SobelEdgeDetectionFilterTest {
+    private static final AbstractFloatImageConverter<String> converter = new
             GrayscaleFloatImageFromTextMatrixConverter();
-    private ImageFilter filter = new PrewittHorizontalEdgeDetectionFilter();
+    private static final ImageFilter filter = new SobelEdgeDetectionFilter();
+    public static final float B = (float) sqrt(0.5F);
 
     @Test
     public void givenEmptyImage_returnsEmptyImage() throws Exception {
@@ -45,7 +49,7 @@ public class PrewittHorizontalEdgeDetectionFilterTest {
     }
 
     @Test
-    public void givenColoredImage_returnsGrayscaleImage() throws Exception {
+    public void givenAnyImage_returnsGrayscaleImage() throws Exception {
         // setup
         FloatImage image = new FloatImage(1, 1, 4);
 
@@ -57,65 +61,44 @@ public class PrewittHorizontalEdgeDetectionFilterTest {
     }
 
     @Test
-    public void givenOneBlackPixelImage_returnsGrayPixel() throws Exception {
+    public void givenImageWithVerticalEdge_marksVerticalEdge() throws Exception {
         // setup
-        FloatImage image = converter.toFloatImage("0");
+        FloatImage image = converter.toFloatImage("0 1 0\n0 1 0\n0 1 0\n");
 
         // execute
         image = filter.processImage(image);
 
         // verify
-        assertThat(image.getRawData()[0], is(0.5F));
-    }
-
-    @Test
-    public void givenOneWhitePixelImage_returnsGrayPixel() throws Exception {
-        // setup
-        FloatImage image = converter.toFloatImage("1");
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getRawData()[0], is(0.5F));
-    }
-
-    @Test
-    public void givenAnyOnePixelImage_returnsGrayPixel() throws Exception {
-        // setup
-        FloatImage image = converter.toFloatImage("0.6");
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getRawData()[0], is(0.5F));
-    }
-
-    @Test
-    public void givenImageWithHorizontalEdge_marksEdge() throws Exception {
-        // setup
-        FloatImage image = converter.toFloatImage("0 0 0\n1 1 1\n0 0 0");
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        FloatImage expected = converter.toFloatImage("1 1 1\n0.5 0.5 0.5\n0 0 0");
+        FloatImage expected = converter.toFloatImage(
+                "0.5 " + B + " 1\n0.5 " + B + " 1\n0.5 " + B + " 1");
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
 
     @Test
-    public void givenImageWithVerticalEdge_findsNothing() throws Exception {
+    public void givenImageWithHorizontalEdge_marksHorizontalEdge() throws Exception {
         // setup
-        FloatImage image = converter.toFloatImage("0 1 0\n0 1 0\n0 1 0");
+        FloatImage image = converter.toFloatImage("0 0 0\n1 1 1\n0 0 0\n");
 
         // execute
         image = filter.processImage(image);
 
         // verify
-        FloatImage expected = converter.toFloatImage("0.5 0.5 0.5\n0.5 0.5 0.5\n0.5 0.5 0.5");
+        FloatImage expected = converter.toFloatImage(
+                "0.5 0.5 0.5\n" + B + " " + B + " " + B + "\n1 1 1\n");
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
 
+    @Test
+    public void givenImageWithDiagonalEdge_marksDiagonalEdge() throws Exception {
+        // setup
+        FloatImage image = converter.toFloatImage("1 0 0\n0 1 0\n0 0 1\n");
+
+        // execute
+        image = filter.processImage(image);
+
+        // verify
+        FloatImage expected = converter.toFloatImage(
+                "1 1 1\n1 " + B + " 1\n1 1 0\n");
+        assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
+    }
 }

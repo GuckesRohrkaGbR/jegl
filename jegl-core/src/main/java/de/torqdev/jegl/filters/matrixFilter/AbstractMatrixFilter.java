@@ -1,24 +1,21 @@
-package de.torqdev.jegl.filters;
+package de.torqdev.jegl.filters.matrixFilter;
 
 import de.torqdev.jegl.core.FloatImage;
-import org.kohsuke.MetaInfServices;
+import de.torqdev.jegl.filters.ImageFilter;
 
 import java.util.stream.IntStream;
 
 /**
  * Created by lennart on 26.05.2017.
  */
-@MetaInfServices
-public class GaussianBlurFilter implements ImageFilter {
-    private static final float[] matrix = new float[]{
-            // @formatter:off
-            1, 2, 1,
-            2, 4, 2,
-            1, 2, 1,
-            // @formatter:on
-    };
+public abstract class AbstractMatrixFilter implements ImageFilter {
+    private final float[] matrix;
+    private final float factor;
 
-    private static final float factor = 1 / 16F;
+    protected AbstractMatrixFilter(float[] matrix, float factor) {
+        this.matrix = matrix;
+        this.factor = factor;
+    }
 
     @Override
     public FloatImage processImage(FloatImage image) {
@@ -35,10 +32,10 @@ public class GaussianBlurFilter implements ImageFilter {
 
         return blurred;
     }
-
     private float[] blur(int x, int y, FloatImage image) {
         float[] newPixel = getArrayWithSameChannelsAs(x, y, image);
         int channels = image.getChannels();
+
 
         IntStream.range(-1, 2).forEach(matrixY -> IntStream.range(-1, 2).forEach(
                 matrixX -> IntStream.range(channels == 4 ? 1 : 0, channels).forEach(
