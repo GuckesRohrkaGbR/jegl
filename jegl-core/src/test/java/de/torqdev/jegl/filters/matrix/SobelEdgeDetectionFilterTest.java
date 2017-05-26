@@ -1,9 +1,6 @@
 package de.torqdev.jegl.filters.matrix;
 
-import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FloatImage;
-import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
-import de.torqdev.jegl.filters.ImageFilter;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -60,8 +57,7 @@ public class SobelEdgeDetectionFilterTest extends AbstractEdgeDetectionFilterTes
         image = filter.processImage(image);
 
         // verify
-        FloatImage expected = CONVERTER.toFloatImage(
-                "1 1 1\n1 " + B + " 1\n1 1 0\n");
+        FloatImage expected = CONVERTER.toFloatImage("1 1 1\n1 " + B + " 1\n1 1 0\n");
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
 }

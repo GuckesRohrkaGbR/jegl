@@ -31,12 +31,9 @@ public class BlackAndWhiteFilter implements ImageFilter {
         FloatImage gray = GRAYSCALE_FILTER.processImage(image);
 
         IntStream.range(0, gray.getHeight()).forEach(
-                y -> IntStream.range(0, gray.getWidth()).forEach(
-                        x -> {
-                            gray.setPixel(x, y, new float[] {thresholdFilter(gray.getPixel(x, y)[0])});
-                        }
-                )
-        );
+                y -> IntStream.range(0, gray.getWidth()).forEach(x -> {
+                    gray.setPixel(x, y, new float[]{thresholdFilter(gray.getPixel(x, y)[0])});
+                }));
         return gray;
     }
 

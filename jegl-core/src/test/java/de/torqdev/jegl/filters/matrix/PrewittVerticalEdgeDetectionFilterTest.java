@@ -1,9 +1,6 @@
 package de.torqdev.jegl.filters.matrix;
 
-import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FloatImage;
-import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
-import de.torqdev.jegl.filters.ImageFilter;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -30,7 +27,7 @@ public class PrewittVerticalEdgeDetectionFilterTest extends AbstractEdgeDetectio
 
         // verify
         FloatImage expected = CONVERTER.toFloatImage("1 0.5 0\n1 0.5 0\n1 0.5 0");
-        assertThat(Arrays.equals(image.getRawData(),expected.getRawData()),is(true));
+        assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
 
     @Test
@@ -43,6 +40,6 @@ public class PrewittVerticalEdgeDetectionFilterTest extends AbstractEdgeDetectio
 
         // verify
         FloatImage expected = CONVERTER.toFloatImage("0.5 0.5 0.5\n0.5 0.5 0.5\n0.5 0.5 0.5");
-        assertThat(Arrays.equals(image.getRawData(),expected.getRawData()),is(true));
+        assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
 }

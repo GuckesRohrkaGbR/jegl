@@ -148,7 +148,7 @@ public class GrayscaleFloatImageFromTextMatrixConverterTest {
     @Test
     public void given1PixelBlackImage_returnsZeroString() throws Exception {
         // setup
-        FloatImage image = new FloatImage(1,1, 1);
+        FloatImage image = new FloatImage(1, 1, 1);
 
         // execute
         String text = converter.fromFloatImage(image);
@@ -160,8 +160,8 @@ public class GrayscaleFloatImageFromTextMatrixConverterTest {
     @Test
     public void given1PixelWhiteImage_returnsOneString() throws Exception {
         // setup
-        FloatImage image = new FloatImage(1,1, 1);
-        image.setPixel(0, 0, new float[] {1F});
+        FloatImage image = new FloatImage(1, 1, 1);
+        image.setPixel(0, 0, new float[]{1F});
 
         // execute
         String text = converter.fromFloatImage(image);
@@ -173,7 +173,7 @@ public class GrayscaleFloatImageFromTextMatrixConverterTest {
     @Test
     public void given3x3Image_returnsThreeLineText() throws Exception {
         // setup
-        FloatImage image = new FloatImage(3,3, 1);
+        FloatImage image = new FloatImage(3, 3, 1);
 
         // execute
         String text = converter.fromFloatImage(image);

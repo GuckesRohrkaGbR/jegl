@@ -27,11 +27,7 @@ public class SepiaFilter implements ImageFilter {
     }
 
     private float[] sepiaForPixel(float[] pixel) {
-        return new float[]{
-                calculateRed(pixel),
-                calculateGreen(pixel),
-                calculateBlue(pixel)
-        };
+        return new float[]{calculateRed(pixel), calculateGreen(pixel), calculateBlue(pixel)};
     }
 
     private float calculateRed(float[] pixel) {

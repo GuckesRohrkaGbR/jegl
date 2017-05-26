@@ -63,8 +63,8 @@ public class LuminosityGrayscaleFilterTest extends AbstractGrayscaleFilterTest {
     @Test
     public void givenOneRedPixelImage_returnsOneGrayPixelImage() throws Exception {
         // setup
-        FloatImage image = new FloatImage(1,1,3);
-        image.setRawData(new float[] { 1F, 0F, 0F });
+        FloatImage image = new FloatImage(1, 1, 3);
+        image.setRawData(new float[]{1F, 0F, 0F});
 
         // execute
         image = filter.processImage(image);
@@ -76,8 +76,8 @@ public class LuminosityGrayscaleFilterTest extends AbstractGrayscaleFilterTest {
     @Test
     public void givenOneGreenPixelImage_returnsOneGrayPixelImage() throws Exception {
         // setup
-        FloatImage image = new FloatImage(1,1,3);
-        image.setRawData(new float[] { 0F, 1F, 0F });
+        FloatImage image = new FloatImage(1, 1, 3);
+        image.setRawData(new float[]{0F, 1F, 0F});
 
         // execute
         image = filter.processImage(image);
@@ -90,8 +90,8 @@ public class LuminosityGrayscaleFilterTest extends AbstractGrayscaleFilterTest {
     @Test
     public void givenOneBluePixelImage_returnsOneGrayPixelImage() throws Exception {
         // setup
-        FloatImage image = new FloatImage(1,1,3);
-        image.setRawData(new float[] { 0F, 0F, 1F });
+        FloatImage image = new FloatImage(1, 1, 3);
+        image.setRawData(new float[]{0F, 0F, 1F});
 
         // execute
         image = filter.processImage(image);
@@ -103,8 +103,8 @@ public class LuminosityGrayscaleFilterTest extends AbstractGrayscaleFilterTest {
     @Test
     public void givenOneYellowPixelImage_returnsOneGrayPixelImage() throws Exception {
         // setup
-        FloatImage image = new FloatImage(1,1,3);
-        image.setRawData(new float[] { 1F, 1F, 0F });
+        FloatImage image = new FloatImage(1, 1, 3);
+        image.setRawData(new float[]{1F, 1F, 0F});
 
         // execute
         image = filter.processImage(image);
@@ -116,13 +116,8 @@ public class LuminosityGrayscaleFilterTest extends AbstractGrayscaleFilterTest {
     @Test
     public void givenFourPixelImage_returnsFourPixelGrayscaleImage() throws Exception {
         // setup
-        FloatImage image = new FloatImage(2,2,3);
-        image.setRawData(new float[] {
-                1F, 0F, 0F,
-                0F, 1F, 0F,
-                0F, 0F, 1F,
-                1F, 1F, 0F
-        });
+        FloatImage image = new FloatImage(2, 2, 3);
+        image.setRawData(new float[]{1F, 0F, 0F, 0F, 1F, 0F, 0F, 0F, 1F, 1F, 1F, 0F});
 
         // execute
         image = filter.processImage(image);

@@ -15,7 +15,7 @@ public abstract class AbstractGrayscaleFilter implements ImageFilter {
     }
 
     private FloatImage grayScale(FloatImage image) {
-        if(image.getChannels() == 1) {
+        if (image.getChannels() == 1) {
             return image;
         }
 

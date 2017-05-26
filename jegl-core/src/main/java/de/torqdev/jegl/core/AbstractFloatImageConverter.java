@@ -6,5 +6,6 @@ package de.torqdev.jegl.core;
  */
 public interface AbstractFloatImageConverter<T> {
     FloatImage toFloatImage(T imageSource);
+
     T fromFloatImage(FloatImage floatImage);
 }

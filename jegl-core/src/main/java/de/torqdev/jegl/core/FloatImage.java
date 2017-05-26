@@ -39,9 +39,7 @@ public class FloatImage {
     }
 
     private boolean sizeIsZero() {
-        return width == 0
-                || rawData.length == 0
-                || channels == 0;
+        return width == 0 || rawData.length == 0 || channels == 0;
     }
 
     public float[] getPixel(int x, int y) {
@@ -51,8 +49,7 @@ public class FloatImage {
 
     public void setPixel(int x, int y, float[] pixel) {
         IntStream.range(0, pixel.length).forEach(
-                i -> rawData[coordsToArrayIndex(x, y) + i] = pixel[i]
-        );
+                i -> rawData[coordsToArrayIndex(x, y) + i] = pixel[i]);
     }
 
     private int coordsToArrayIndex(int x, int y) {

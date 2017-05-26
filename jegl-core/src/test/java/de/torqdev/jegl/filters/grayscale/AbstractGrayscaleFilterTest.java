@@ -5,8 +5,8 @@ import de.torqdev.jegl.filters.AbstractSameSizeImageFilterTest;
 import de.torqdev.jegl.filters.ImageFilter;
 import org.junit.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.core.Is.*;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
@@ -31,7 +31,7 @@ public abstract class AbstractGrayscaleFilterTest extends AbstractSameSizeImageF
     public void givenGrayscaleImage_returnsTheImageItself() throws Exception {
         // setup
         FloatImage image = new FloatImage(1, 1, 1);
-        image.setRawData(new float[] {0.3F});
+        image.setRawData(new float[]{0.3F});
 
         // execute
         image = filter.processImage(image);
@@ -44,7 +44,7 @@ public abstract class AbstractGrayscaleFilterTest extends AbstractSameSizeImageF
     public void givenOneBlackPixelImage_returnsOneBlackPixelImage() throws Exception {
         // setup
         FloatImage image = new FloatImage(1, 1, 3);
-        image.setRawData(new float[] { 0F, 0F, 0F });
+        image.setRawData(new float[]{0F, 0F, 0F});
 
         // execute
         image = filter.processImage(image);
@@ -56,8 +56,8 @@ public abstract class AbstractGrayscaleFilterTest extends AbstractSameSizeImageF
     @Test
     public void givenOneWhitePixelImage_returnsOneWhitePixelImage() throws Exception {
         // setup
-        FloatImage image = new FloatImage(1,1,3);
-        image.setRawData(new float[] { 1F, 1F, 1F });
+        FloatImage image = new FloatImage(1, 1, 3);
+        image.setRawData(new float[]{1F, 1F, 1F});
 
         // execute
         image = filter.processImage(image);

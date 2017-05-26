@@ -16,41 +16,43 @@ public class AverageGrayscaleFilterTest extends AbstractGrayscaleFilterTest {
     }
 
     @Test
-    public void givenOneRedPixelImageWithAlpha_returnsOneGrayPixelImageWithoutAlpha() throws Exception {
+    public void givenOneRedPixelImageWithAlpha_returnsOneGrayPixelImageWithoutAlpha()
+            throws Exception {
         // setup
-        FloatImage image = new FloatImage(1,1,4);
-        image.setRawData(new float[] { 0.5F, 1F, 0F, 0F });
+        FloatImage image = new FloatImage(1, 1, 4);
+        image.setRawData(new float[]{0.5F, 1F, 0F, 0F});
 
         // execute
         image = filter.processImage(image);
 
         // verify
-        assertThat(image.getRawData()[0], is(1/3F));
+        assertThat(image.getRawData()[0], is(1 / 3F));
     }
 
     @Test
-    public void givenOneGreenPixelImageWithAlpha_returnsOneGrayPixelImageWithoutAlpha() throws Exception {
+    public void givenOneGreenPixelImageWithAlpha_returnsOneGrayPixelImageWithoutAlpha()
+            throws Exception {
         // setup
-        FloatImage image = new FloatImage(1,1,4);
-        image.setRawData(new float[] { 0.5F, 0F, 1F, 0F });
+        FloatImage image = new FloatImage(1, 1, 4);
+        image.setRawData(new float[]{0.5F, 0F, 1F, 0F});
 
         // execute
         image = filter.processImage(image);
 
         // verify
-        assertThat(image.getRawData()[0], is(1/3F));
+        assertThat(image.getRawData()[0], is(1 / 3F));
     }
 
     @Test
     public void givenOneBluePixelImage_returnsOneGrayPixelImage() throws Exception {
         // setup
-        FloatImage image = new FloatImage(1,1,3);
-        image.setRawData(new float[] { 0F, 0F, 1F });
+        FloatImage image = new FloatImage(1, 1, 3);
+        image.setRawData(new float[]{0F, 0F, 1F});
 
         // execute
         image = filter.processImage(image);
 
         // verify
-        assertThat(image.getRawData()[0], is(1/3F));
+        assertThat(image.getRawData()[0], is(1 / 3F));
     }
 }

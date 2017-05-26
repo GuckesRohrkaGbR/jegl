@@ -63,11 +63,9 @@ public class BoxBlurFilterTest extends AbstractBlurFilterTest {
         image = filter.processImage(image);
 
         // verify
-        assertTrue(Arrays.equals(image.getRawData(), new float[]{
-                0.2F, 6/9F, 6/9F, 5/9F,
-                0.4F, 6/9F, 3/9F, 4/9F,
-                0.6F, 3/9F, 6/9F, 4/9F,
-                0.8F, 3/9F, 3/9F, 5/9F
-        }));
+        assertTrue(Arrays.equals(image.getRawData(),
+                                 new float[]{0.2F, 6 / 9F, 6 / 9F, 5 / 9F, 0.4F, 6 / 9F, 3 / 9F,
+                                             4 / 9F, 0.6F, 3 / 9F, 6 / 9F, 4 / 9F, 0.8F, 3 / 9F,
+                                             3 / 9F, 5 / 9F}));
     }
 }

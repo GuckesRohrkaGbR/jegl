@@ -7,8 +7,8 @@ import de.torqdev.jegl.filters.AbstractSameSizeImageFilterTest;
 import de.torqdev.jegl.filters.ImageFilter;
 import org.junit.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.core.Is.*;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>

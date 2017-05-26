@@ -5,8 +5,7 @@ import de.torqdev.jegl.filters.ImageFilter;
 
 import java.util.stream.IntStream;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
+import static java.lang.Math.*;
 
 /**
  * Created by lennart on 26.05.2017.
@@ -31,7 +30,7 @@ public abstract class AbstractMatrixFilter implements ImageFilter {
 
     private FloatImage blurred(FloatImage image) {
         FloatImage blurred = new FloatImage(image.getWidth(), image.getHeight(),
-                image.getChannels());
+                                            image.getChannels());
 
         IntStream.range(0, image.getHeight()).forEach(
                 y -> IntStream.range(0, image.getWidth()).forEach(
@@ -39,6 +38,7 @@ public abstract class AbstractMatrixFilter implements ImageFilter {
 
         return blurred;
     }
+
     private float[] blur(int x, int y, FloatImage image) {
         float[] newPixel = getArrayWithSameChannelsAs(x, y, image);
         int channels = image.getChannels();
@@ -47,7 +47,7 @@ public abstract class AbstractMatrixFilter implements ImageFilter {
         IntStream.range(-1, 2).forEach(matrixY -> IntStream.range(-1, 2).forEach(
                 matrixX -> IntStream.range(channels == 4 ? 1 : 0, channels).forEach(
                         channel -> newPixel[channel] += image.getCappedPixel(x + matrixX,
-                                y + matrixY)
+                                                                             y + matrixY)
                                 [channel] * matrix[(matrixX + 1) + (matrixY + 1) * 3])));
 
         // divide at the end to avoid all your colors being rounded down to null;

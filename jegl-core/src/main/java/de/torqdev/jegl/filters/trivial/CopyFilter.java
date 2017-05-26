@@ -16,7 +16,8 @@ public class CopyFilter implements ImageFilter {
 
     @Override
     public FloatImage processImage(FloatImage image) {
-        FloatImage newImage = new FloatImage(image.getWidth(), image.getHeight(), image.getChannels());
+        FloatImage newImage = new FloatImage(image.getWidth(), image.getHeight(),
+                                             image.getChannels());
         newImage.setRawData(ArrayUtils.clone(image.getRawData()));
         return newImage;
     }

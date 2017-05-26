@@ -1,20 +1,13 @@
 package de.torqdev.jegl.filters.matrix;
 
-import de.torqdev.jegl.core.FloatImage;
-import de.torqdev.jegl.filters.ImageFilter;
-import de.torqdev.jegl.filters.grayscale.AverageGrayscaleFilter;
 import org.kohsuke.MetaInfServices;
-
-import java.util.stream.IntStream;
-
-import static java.lang.Math.*;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
 @MetaInfServices
-public class SobelHorizontalEdgeDetectionFilter extends AbstractEdgeDetectorFilter{
+public class SobelHorizontalEdgeDetectionFilter extends AbstractEdgeDetectorFilter {
     private static final float[] sobelOperator = new float[]{
             // @formatter:off
             1, 2, 1,
