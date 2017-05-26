@@ -1,6 +1,7 @@
-package de.torqdev.jegl.filters;
+package de.torqdev.jegl.filters.trivial;
 
 import de.torqdev.jegl.core.FloatImage;
+import de.torqdev.jegl.filters.ImageFilter;
 import org.apache.commons.lang3.ArrayUtils;
 import org.kohsuke.MetaInfServices;
 

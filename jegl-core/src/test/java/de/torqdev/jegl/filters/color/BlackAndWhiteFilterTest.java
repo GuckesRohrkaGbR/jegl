@@ -1,9 +1,8 @@
-package de.torqdev.jegl.filters.grayscale;
+package de.torqdev.jegl.filters.color;
 
 import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
-import de.torqdev.jegl.filters.BlackAndWhiteFilter;
 import de.torqdev.jegl.filters.ImageFilter;
 import org.junit.Test;
 

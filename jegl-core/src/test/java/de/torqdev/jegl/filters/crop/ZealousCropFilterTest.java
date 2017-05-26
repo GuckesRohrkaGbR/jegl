@@ -1,9 +1,9 @@
-package de.torqdev.jegl.filters;
+package de.torqdev.jegl.filters.crop;
 
 import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
-import org.junit.Ignore;
+import de.torqdev.jegl.filters.ImageFilter;
 import org.junit.Test;
 
 import java.util.Arrays;

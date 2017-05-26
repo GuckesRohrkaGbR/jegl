@@ -1,6 +1,7 @@
-package de.torqdev.jegl.filters;
+package de.torqdev.jegl.filters.color;
 
 import de.torqdev.jegl.core.FloatImage;
+import de.torqdev.jegl.filters.ImageFilter;
 import org.kohsuke.MetaInfServices;
 
 import static java.lang.Math.min;
