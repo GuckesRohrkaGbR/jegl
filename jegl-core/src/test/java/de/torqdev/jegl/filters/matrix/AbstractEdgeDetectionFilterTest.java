@@ -7,8 +7,9 @@ import de.torqdev.jegl.filters.AbstractSameSizeImageFilterTest;
 import de.torqdev.jegl.filters.ImageFilter;
 import org.junit.Test;
 
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.core.Is.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
@@ -50,7 +51,7 @@ public abstract class AbstractEdgeDetectionFilterTest extends AbstractSameSizeIm
         image = filter.processImage(image);
 
         // verify
-        assertThat(image.getRawData()[0], is(mean));
+        assertEquals(image.getRawData()[0], mean, 0.001F);
     }
 
     @Test
@@ -62,7 +63,7 @@ public abstract class AbstractEdgeDetectionFilterTest extends AbstractSameSizeIm
         image = filter.processImage(image);
 
         // verify
-        assertThat(image.getRawData()[0], is(mean));
+        assertEquals(image.getRawData()[0], mean, 0.001F);
     }
 
     @Test
@@ -74,6 +75,6 @@ public abstract class AbstractEdgeDetectionFilterTest extends AbstractSameSizeIm
         image = filter.processImage(image);
 
         // verify
-        assertThat(image.getRawData()[0], is(mean));
+        assertEquals(image.getRawData()[0], mean, 0.001F);
     }
 }

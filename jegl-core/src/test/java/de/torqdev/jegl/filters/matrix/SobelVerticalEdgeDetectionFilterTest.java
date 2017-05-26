@@ -15,9 +15,6 @@ import static org.hamcrest.core.Is.*;
  * @version 1.0
  */
 public class SobelVerticalEdgeDetectionFilterTest extends AbstractEdgeDetectionFilterTest {
-    private AbstractFloatImageConverter<String> CONVERTER = new
-            GrayscaleFloatImageFromTextMatrixConverter();
-
     public SobelVerticalEdgeDetectionFilterTest() {
         super(new SobelVerticalEdgeDetectionFilter());
     }
