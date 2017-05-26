@@ -15,8 +15,6 @@ import static java.lang.Math.*;
  */
 @MetaInfServices
 public class SobelHorizontalEdgeDetectionFilter extends AbstractEdgeDetectorFilter{
-    private static final AverageGrayscaleFilter GRAYSCALE_FILTER = new AverageGrayscaleFilter();
-
     private static final float[] sobelOperator = new float[]{
             // @formatter:off
             1, 2, 1,
@@ -25,11 +23,6 @@ public class SobelHorizontalEdgeDetectionFilter extends AbstractEdgeDetectorFilt
             // @formatter:on
     };
     private static final float factor = 1F;
-
-    @Override
-    public FloatImage processImage(FloatImage image) {
-        return super.processImage(GRAYSCALE_FILTER.processImage(image));
-    }
 
     public SobelHorizontalEdgeDetectionFilter() {
         super(sobelOperator, factor);
