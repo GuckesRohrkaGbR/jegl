@@ -15,7 +15,7 @@ public class BoxBlurFilter implements ImageFilter {
             // @formatter:off
             1, 1, 1,
             1, 1, 1,
-            1, 1, 1,
+            1, 1, 1
             // @formatter:on
     };
 

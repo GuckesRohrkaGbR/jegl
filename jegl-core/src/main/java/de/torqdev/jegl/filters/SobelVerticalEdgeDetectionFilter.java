@@ -1,6 +1,7 @@
 package de.torqdev.jegl.filters;
 
 import de.torqdev.jegl.core.FloatImage;
+import de.torqdev.jegl.filters.grayscale.AverageGrayscaleFilter;
 import org.kohsuke.MetaInfServices;
 
 import java.util.stream.IntStream;
