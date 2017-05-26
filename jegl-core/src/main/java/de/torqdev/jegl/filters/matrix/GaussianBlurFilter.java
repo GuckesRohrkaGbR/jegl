@@ -15,9 +15,9 @@ public class GaussianBlurFilter extends AbstractMatrixFilter {
             // @formatter:on
     };
 
-    private static final float factor = 1 / 16F;
+    private static final float FACTOR = 1 / 16F;
 
     public GaussianBlurFilter() {
-        super(MATRIX, factor);
+        super(MATRIX, FACTOR);
     }
 }

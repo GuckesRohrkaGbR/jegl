@@ -16,9 +16,9 @@ public class BoxBlurFilter extends AbstractMatrixFilter {
             // @formatter:on
     };
 
-    private static final float factor = 1 / 9F;
+    private static final float FACTOR = 1 / 9F;
 
     public BoxBlurFilter() {
-        super(MATRIX, factor);
+        super(MATRIX, FACTOR);
     }
 }

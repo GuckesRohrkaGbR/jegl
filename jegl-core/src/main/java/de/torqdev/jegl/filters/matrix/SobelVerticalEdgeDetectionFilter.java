@@ -15,9 +15,9 @@ public class SobelVerticalEdgeDetectionFilter extends AbstractEdgeDetectorFilter
             1, 0, -1,
             // @formatter:on
     };
-    private static final float factor = 1F;
+    private static final float FACTOR = 1F;
 
     public SobelVerticalEdgeDetectionFilter() {
-        super(SOBEL_OPERATOR, factor);
+        super(SOBEL_OPERATOR, FACTOR);
     }
 }
