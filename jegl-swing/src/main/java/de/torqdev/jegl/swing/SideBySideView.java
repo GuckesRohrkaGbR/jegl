@@ -44,7 +44,6 @@ public class SideBySideView extends JFrame {
 
     public static void main(String[] args) {
         SideBySideView window = new SideBySideView();
-        window.display();
     }
 
     public void display() {
