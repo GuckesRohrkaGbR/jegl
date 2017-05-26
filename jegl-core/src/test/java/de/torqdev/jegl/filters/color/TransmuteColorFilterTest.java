@@ -127,5 +127,4 @@ public class TransmuteColorFilterTest {
         float[] expected = {0F, 1F, 0F, 0F, 0F, 1F, 1F, 0F, 0F, 0F, 1F, 1F};
         assertThat(Arrays.equals(image.getRawData(), expected), is(true));
     }
-    // restore
 }
