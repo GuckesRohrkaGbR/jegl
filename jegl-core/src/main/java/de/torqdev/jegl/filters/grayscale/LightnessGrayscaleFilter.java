@@ -1,10 +1,7 @@
 package de.torqdev.jegl.filters.grayscale;
 
 import de.torqdev.jegl.core.FloatImage;
-import de.torqdev.jegl.filters.ImageFilter;
 import org.kohsuke.MetaInfServices;
-
-import java.util.stream.IntStream;
 
 import static java.lang.Math.*;
 
@@ -13,7 +10,7 @@ import static java.lang.Math.*;
  * @version 1.0
  */
 @MetaInfServices
-public class LightnessGrayscaleFilter extends AbstractGrayScaleFilter {
+public class LightnessGrayscaleFilter extends AbstractGrayscaleFilter {
     @Override
     protected float calculateGrayValueAt(int i, FloatImage image) {
         int channels = image.getChannels();

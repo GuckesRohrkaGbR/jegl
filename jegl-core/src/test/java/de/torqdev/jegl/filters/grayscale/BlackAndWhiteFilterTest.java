@@ -1,8 +1,10 @@
-package de.torqdev.jegl.filters;
+package de.torqdev.jegl.filters.grayscale;
 
 import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
+import de.torqdev.jegl.filters.BlackAndWhiteFilter;
+import de.torqdev.jegl.filters.ImageFilter;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.*;
@@ -30,7 +32,7 @@ public class BlackAndWhiteFilterTest {
     }
 
     @Test
-    public void givenAnyImage_returnsImageWithTheSameChannelCount() throws Exception {
+    public void givenAnyImage_returnsImageWithTheOneChannel() throws Exception {
         // setup
         FloatImage image = new FloatImage(0, 0, 3);
 
@@ -38,7 +40,7 @@ public class BlackAndWhiteFilterTest {
         image = filter.processImage(image);
 
         // verify
-        assertThat(image.getChannels(), is(3));
+        assertThat(image.getChannels(), is(1));
     }
 
     @Test
@@ -76,21 +78,5 @@ public class BlackAndWhiteFilterTest {
 
         // verify
         assertThat(image.getPixel(0, 0)[0], is(0F));
-    }
-
-    @Test
-    public void givenImageWithAlphaChannel_alphaValuesAreNotChanged() throws Exception {
-        // setup
-        FloatImage image = new FloatImage(1, 1, 4);
-        image.setRawData(new float[] { 0.2F, 0.2F, 0.8F, 0.8F });
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getRawData()[0], is(0.2F));
-        assertThat(image.getRawData()[1], is(1F));
-        assertThat(image.getRawData()[2], is(1F));
-        assertThat(image.getRawData()[3], is(1F));
     }
 }

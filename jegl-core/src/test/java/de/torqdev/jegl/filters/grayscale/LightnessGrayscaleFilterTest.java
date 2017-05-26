@@ -1,8 +1,7 @@
-package de.torqdev.jegl.filters.grayScaleFilters;
+package de.torqdev.jegl.filters.grayscale;
 
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.filters.ImageFilter;
-import de.torqdev.jegl.filters.grayscale.LightnessGrayscaleFilter;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.*;

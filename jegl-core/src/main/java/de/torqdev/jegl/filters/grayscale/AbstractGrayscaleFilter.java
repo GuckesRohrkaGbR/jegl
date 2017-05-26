@@ -8,7 +8,7 @@ import java.util.stream.IntStream;
 /**
  * Created by lennart on 26.05.2017.
  */
-public abstract class AbstractGrayScaleFilter implements ImageFilter {
+public abstract class AbstractGrayscaleFilter implements ImageFilter {
     @Override
     public FloatImage processImage(FloatImage image) {
         return grayScale(image);

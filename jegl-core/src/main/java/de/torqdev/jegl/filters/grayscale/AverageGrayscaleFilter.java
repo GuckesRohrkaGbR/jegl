@@ -1,17 +1,14 @@
 package de.torqdev.jegl.filters.grayscale;
 
 import de.torqdev.jegl.core.FloatImage;
-import de.torqdev.jegl.filters.ImageFilter;
 import org.kohsuke.MetaInfServices;
-
-import java.util.stream.IntStream;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
 @MetaInfServices
-public class AverageGrayscaleFilter extends AbstractGrayScaleFilter {
+public class AverageGrayscaleFilter extends AbstractGrayscaleFilter {
     @Override
     protected float calculateGrayValueAt(int i, FloatImage image) {
         int channels = image.getChannels();
