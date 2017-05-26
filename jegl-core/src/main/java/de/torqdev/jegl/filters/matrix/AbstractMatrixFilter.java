@@ -5,6 +5,9 @@ import de.torqdev.jegl.filters.ImageFilter;
 
 import java.util.stream.IntStream;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+
 /**
  * Created by lennart on 26.05.2017.
  */
@@ -15,6 +18,10 @@ public abstract class AbstractMatrixFilter implements ImageFilter {
     protected AbstractMatrixFilter(float[] matrix, float factor) {
         this.matrix = matrix;
         this.factor = factor;
+    }
+
+    protected float normalize(float color) {
+        return max(0F, min(1F, color));
     }
 
     @Override
@@ -45,7 +52,7 @@ public abstract class AbstractMatrixFilter implements ImageFilter {
 
         // divide at the end to avoid all your colors being rounded down to null;
         IntStream.range(channels == 4 ? 1 : 0, channels).forEach(
-                channel -> newPixel[channel] *= factor);
+                channel -> newPixel[channel] = normalize(newPixel[channel] * factor));
         return newPixel;
     }
 
