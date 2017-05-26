@@ -1,11 +1,12 @@
 package de.torqdev.jegl.filters.matrix;
 
+import de.torqdev.jegl.filters.ImageFilter;
 import org.kohsuke.MetaInfServices;
 
 /**
  * Created by lennart on 26.05.2017.
  */
-@MetaInfServices
+@MetaInfServices(value = ImageFilter.class)
 public class GaussianBlurFilter extends AbstractMatrixFilter {
     private static final float[] MATRIX = new float[]{
             // @formatter:off

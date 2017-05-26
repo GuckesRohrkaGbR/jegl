@@ -1,7 +1,9 @@
 package de.torqdev.jegl.filters.matrix;
 
 import de.torqdev.jegl.core.FloatImage;
+import de.torqdev.jegl.filters.ImageFilter;
 import de.torqdev.jegl.filters.grayscale.AverageGrayscaleFilter;
+import org.kohsuke.MetaInfServices;
 
 import static java.lang.Math.*;
 

@@ -1,11 +1,12 @@
 package de.torqdev.jegl.filters.matrix;
 
+import de.torqdev.jegl.filters.ImageFilter;
 import org.kohsuke.MetaInfServices;
 
 /**
  * Created by jonas on 26.05.17.
  */
-@MetaInfServices
+@MetaInfServices(value = ImageFilter.class)
 public class PrewittVerticalEdgeDetectionFilter extends AbstractEdgeDetectorFilter {
     private static final float[] PREWITT_OPERATOR = new float[]{
             // @formatter:off
@@ -16,7 +17,7 @@ public class PrewittVerticalEdgeDetectionFilter extends AbstractEdgeDetectorFilt
     };
     private static final float FACTOR = 1F;
 
-    protected PrewittVerticalEdgeDetectionFilter() {
+    public PrewittVerticalEdgeDetectionFilter() {
         super(PREWITT_OPERATOR, FACTOR);
     }
 }
