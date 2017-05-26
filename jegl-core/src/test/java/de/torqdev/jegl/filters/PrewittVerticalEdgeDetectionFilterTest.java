@@ -100,7 +100,6 @@ public class PrewittVerticalEdgeDetectionFilterTest {
         image = filter.processImage(image);
 
         // verify
-        System.out.println(converter.fromFloatImage(image));
         FloatImage expected = converter.toFloatImage("1 0.5 0\n1 0.5 0\n1 0.5 0");
         assertThat(Arrays.equals(image.getRawData(),expected.getRawData()),is(true));
     }

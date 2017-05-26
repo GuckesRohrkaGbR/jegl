@@ -11,15 +11,18 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import org.apache.log4j.Logger;
 
 import static java.awt.BorderLayout.*;
 import static javax.swing.BoxLayout.*;
+import static org.apache.log4j.Logger.*;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
 public class SideBySideView extends JFrame {
+    private static final Logger log = getLogger(SideBySideView.class);
     private JPanel originalImagePanel = new JPanel();
     private JPanel previewImagePanel = new JPanel();
     private JLabel originalLabel = new JLabel();
@@ -36,7 +39,7 @@ public class SideBySideView extends JFrame {
                 originalImage = ImageIO.read(url);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            log.warn(e);
         }
         this.display();
     }
@@ -94,7 +97,7 @@ public class SideBySideView extends JFrame {
             try {
                 originalImage = ImageIO.read(fileChooser.getSelectedFile());
             } catch (IOException e) {
-                e.printStackTrace();
+                log.warn(e);
             }
         }
 
