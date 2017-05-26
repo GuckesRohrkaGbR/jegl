@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class BoxBlurFilterTest {
     private AbstractFloatImageConverter<String> converter = new
             GrayscaleFloatImageFromTextMatrixConverter();
-    private ImageFilter filter = new BoxBlurFilter();
+    private ImageFilter filter = new GaussianBlurFilter();
 
     @Test
     public void givenEmptyImage_returnsEmptyImage() throws Exception {
