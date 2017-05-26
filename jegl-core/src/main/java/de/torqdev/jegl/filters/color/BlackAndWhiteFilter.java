@@ -2,9 +2,7 @@ package de.torqdev.jegl.filters.color;
 
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.filters.ImageFilter;
-import de.torqdev.jegl.filters.grayscale.AbstractGrayscaleFilter;
 import de.torqdev.jegl.filters.grayscale.AverageGrayscaleFilter;
-import org.apache.commons.lang3.ArrayUtils;
 import org.kohsuke.MetaInfServices;
 
 import java.util.stream.IntStream;
