@@ -102,7 +102,6 @@ public class SobelHorizontalEdgeDetectionFilterTest {
 
         // verify
         FloatImage expected = converter.toFloatImage("0 0 0\n0.5 0.5 0.5\n1 1 1");
-        System.out.println(converter.fromFloatImage(image));
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
 
@@ -116,7 +115,6 @@ public class SobelHorizontalEdgeDetectionFilterTest {
 
         // verify
         FloatImage expected = converter.toFloatImage("0.5 0.5 0.5\n0.5 0.5 0.5\n0.5 0.5 0.5");
-        System.out.println(converter.fromFloatImage(image));
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
 }

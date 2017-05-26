@@ -66,11 +66,10 @@ public class FloatImageFromBufferedImageConverter implements AbstractFloatImageC
     }
 
     private int getColorFrom(float[] pixel) {
-        Color color;
+        Color color = Color.BLACK;
         switch (pixel.length) {
             case 1:
                 if(pixel[0] < 0F || pixel[0] > 1F)
-                    System.out.println(pixel[0]);
                 color = new Color(pixel[0], pixel[0], pixel[0]);
                 break;
             case 3:

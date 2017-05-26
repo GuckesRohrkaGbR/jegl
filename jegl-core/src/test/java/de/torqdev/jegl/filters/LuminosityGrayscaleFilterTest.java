@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
  * @author <a href="mailto:jonas.egert@torq-dev.de">Jonas Egert</a>
@@ -46,6 +47,45 @@ public class LuminosityGrayscaleFilterTest {
     }
 
     @Test
+    public void givenGrayscaleImage_returnsIdentity() throws Exception {
+        // setup
+        FloatImage image1 = new FloatImage(1, 1, 1);
+
+        // execute
+        FloatImage image2 = filter.processImage(image1);
+
+        // verify
+        assertThat(image1, is(equalTo(image2)));
+    }
+
+    @Test
+    public void givenOneRedPixelImage_returnsOneGrayPixelImage() throws Exception {
+        // setup
+        FloatImage image = new FloatImage(1,1,3);
+        image.setRawData(new float[] { 1F, 0F, 0F });
+
+        // execute
+        image = filter.processImage(image);
+
+        // verify
+        assertThat(image.getRawData()[0], is(0.21F));
+    }
+
+    @Test
+    public void givenOneGreenPixelImage_returnsOneGrayPixelImage() throws Exception {
+        // setup
+        FloatImage image = new FloatImage(1,1,3);
+        image.setRawData(new float[] { 0F, 1F, 0F });
+
+        // execute
+        image = filter.processImage(image);
+
+        // verify
+        assertThat(image.getRawData()[0], is(0.72F));
+    }
+
+
+    @Test
     public void givenOneBluePixelImage_returnsOneGrayPixelImage() throws Exception {
         // setup
         FloatImage image = new FloatImage(1,1,3);
@@ -55,7 +95,40 @@ public class LuminosityGrayscaleFilterTest {
         image = filter.processImage(image);
 
         // verify
-        // assertThat(image.getRawData()[0], is(0.07F));
-        // Formel: https://www.johndcook.com/blog/2009/08/24/algorithms-convert-color-grayscale/
+        assertThat(image.getRawData()[0], is(0.07F));
+    }
+
+    @Test
+    public void givenOneYellowPixelImage_returnsOneGrayPixelImage() throws Exception {
+        // setup
+        FloatImage image = new FloatImage(1,1,3);
+        image.setRawData(new float[] { 1F, 1F, 0F });
+
+        // execute
+        image = filter.processImage(image);
+
+        // verify
+        assertThat(image.getRawData()[0], is(0.93F));
+    }
+
+    @Test
+    public void givenFourPixelImage_returnsFourPixelGrayscaleImage() throws Exception {
+        // setup
+        FloatImage image = new FloatImage(2,2,3);
+        image.setRawData(new float[] {
+                1F, 0F, 0F,
+                0F, 1F, 0F,
+                0F, 0F, 1F,
+                1F, 1F, 0F
+        });
+
+        // execute
+        image = filter.processImage(image);
+
+        // verify
+        assertThat(image.getRawData()[0], is(0.21F));
+        assertThat(image.getRawData()[1], is(0.72F));
+        assertThat(image.getRawData()[2], is(0.07F));
+        assertThat(image.getRawData()[3], is(0.93F));
     }
 }
