@@ -4,7 +4,7 @@ import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
 import de.torqdev.jegl.filters.ImageFilter;
-import de.torqdev.jegl.filters.matrixFilter.PrewittHorizontalEdgeDetectionFilter;
+import de.torqdev.jegl.filters.matrix.PrewittHorizontalEdgeDetectionFilter;
 import org.junit.Test;
 
 import java.util.Arrays;

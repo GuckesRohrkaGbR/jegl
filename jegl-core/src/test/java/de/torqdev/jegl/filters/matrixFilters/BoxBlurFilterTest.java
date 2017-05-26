@@ -3,7 +3,7 @@ package de.torqdev.jegl.filters.matrixFilters;
 import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
-import de.torqdev.jegl.filters.matrixFilter.BoxBlurFilter;
+import de.torqdev.jegl.filters.matrix.BoxBlurFilter;
 import de.torqdev.jegl.filters.ImageFilter;
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package de.torqdev.jegl.filters.matrixFilter;
+package de.torqdev.jegl.filters.matrix;
 
 import org.kohsuke.MetaInfServices;
 

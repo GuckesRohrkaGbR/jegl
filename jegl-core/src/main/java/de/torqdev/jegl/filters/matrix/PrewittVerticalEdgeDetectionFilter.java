@@ -1,4 +1,4 @@
-package de.torqdev.jegl.filters.matrixFilter;
+package de.torqdev.jegl.filters.matrix;
 
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.filters.ImageFilter;
@@ -7,20 +7,18 @@ import org.kohsuke.MetaInfServices;
 
 import java.util.stream.IntStream;
 
-import static java.lang.Math.*;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 /**
- * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
- * @version 1.0
+ * Created by jonas on 26.05.17.
  */
 @MetaInfServices
-public class SobelVerticalEdgeDetectionFilter implements ImageFilter {
-    private static final float[] sobelOperator = new float[]{
-            // @formatter:off
-            1, 0, -1,
-            2, 0, -2,
-            1, 0, -1,
-            // @formatter:on
+public class PrewittVerticalEdgeDetectionFilter implements ImageFilter {
+    private static final float[] prewittOperator = new float[]{
+            -1, 0, 1,
+            -1, 0, 1,
+            -1, 0, 1,
     };
     private static final float factor = 1F;
 
@@ -28,18 +26,17 @@ public class SobelVerticalEdgeDetectionFilter implements ImageFilter {
 
     @Override
     public FloatImage processImage(FloatImage image) {
-        return applySobel(grayscale.processImage(image));
+        return applyPrewitt(grayscale.processImage(image));
     }
 
-    private FloatImage applySobel(FloatImage image) {
-        FloatImage sobelImage = new FloatImage(image.getWidth(), image.getHeight(),
-                                            image.getChannels());
+    private FloatImage applyPrewitt(FloatImage image) {
+        FloatImage prewittImage = new FloatImage(image.getWidth(), image.getHeight(), image.getChannels());
 
         IntStream.range(0, image.getHeight()).forEach(
                 y -> IntStream.range(0, image.getWidth()).forEach(
-                        x -> sobelImage.setPixel(x, y, calculatePixel(x, y, image))));
+                        x -> prewittImage.setPixel(x, y, calculatePixel(x, y, image))));
 
-        return sobelImage;
+        return prewittImage;
     }
 
     private float[] calculatePixel(int x, int y, FloatImage image) {
@@ -49,16 +46,13 @@ public class SobelVerticalEdgeDetectionFilter implements ImageFilter {
         IntStream.range(-1, 2).forEach(matrixY -> IntStream.range(-1, 2).forEach(
                 matrixX -> IntStream.range(channels == 4 ? 1 : 0, channels).forEach(
                         channel -> newPixel[channel] += image.getCappedPixel(x + matrixX,
-                                                                             y + matrixY)
-                                [channel] * sobelOperator[(matrixX + 1) + (matrixY + 1) * 3])));
+                                y + matrixY)
+                                [channel] * prewittOperator[(matrixX + 1) + (matrixY + 1) * 3])));
 
         IntStream.range(channels == 4 ? 1 : 0, channels).forEach(
                 channel -> newPixel[channel] = normalize(newPixel[channel] *= factor));
         return newPixel;
-    }
 
-    private float normalize(float value) {
-        return (max(-1F, min(1F, value)) + 1F) / 2F;
     }
 
     private float[] getArrayWithSameChannelsAs(int x, int y, FloatImage image) {
@@ -68,4 +62,11 @@ public class SobelVerticalEdgeDetectionFilter implements ImageFilter {
         }
         return new float[channels];
     }
+
+    private float normalize(float value) {
+        return (max(-1F, min(1F, value)) + 1F) / 2F;
+    }
+
 }
+
+

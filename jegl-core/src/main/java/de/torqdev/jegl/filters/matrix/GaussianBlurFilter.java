@@ -1,10 +1,6 @@
-package de.torqdev.jegl.filters.matrixFilter;
+package de.torqdev.jegl.filters.matrix;
 
-import de.torqdev.jegl.core.FloatImage;
-import de.torqdev.jegl.filters.ImageFilter;
 import org.kohsuke.MetaInfServices;
-
-import java.util.stream.IntStream;
 
 /**
  * Created by lennart on 26.05.2017.
