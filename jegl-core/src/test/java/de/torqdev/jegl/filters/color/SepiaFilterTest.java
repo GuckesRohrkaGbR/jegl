@@ -1,46 +1,23 @@
 package de.torqdev.jegl.filters.color;
 
 import de.torqdev.jegl.core.FloatImage;
+import de.torqdev.jegl.filters.AbstractSameSizeImageFilterTest;
 import de.torqdev.jegl.filters.ImageFilter;
 import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.Is.is;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class SepiaFilterTest {
-
-    private final ImageFilter filter = new SepiaFilter();
-
-    @Test
-    public void givenEmptyImage_returnsEmptyImage() throws Exception {
-        // setup
-        FloatImage image = new FloatImage(0, 0, 1);
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getRawData().length, is(0));
-    }
-
-    @Test
-    public void givenAnyImage_returnsImageOfTheSameSize() throws Exception {
-        // setup
-        FloatImage image = new FloatImage(300, 200, 3);
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getWidth(), is(300));
-        assertThat(image.getHeight(), is(200));
+public class SepiaFilterTest extends AbstractSameSizeImageFilterTest {
+    public SepiaFilterTest() {
+        super(new SepiaFilter());
     }
 
     @Test

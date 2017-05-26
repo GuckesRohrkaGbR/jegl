@@ -3,33 +3,24 @@ package de.torqdev.jegl.filters.crop;
 import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
-import de.torqdev.jegl.filters.ImageFilter;
+import de.torqdev.jegl.filters.AbstractImageFilterTest;
 import org.junit.Test;
 
 import java.util.Arrays;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class ZealousCropFilterTest {
+public class ZealousCropFilterTest extends AbstractImageFilterTest {
     private AbstractFloatImageConverter<String> converter = new
             GrayscaleFloatImageFromTextMatrixConverter();
-    private ImageFilter filter = new ZealousCropFilter();
 
-    @Test
-    public void givenEmptyImage_returnsEmptyImage() throws Exception {
-        // setup
-        FloatImage image = new FloatImage(0, 0, 1);
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getRawData().length, is(0));
+    public ZealousCropFilterTest() {
+        super(new ZealousCropFilter());
     }
 
     @Test

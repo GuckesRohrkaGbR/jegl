@@ -6,9 +6,7 @@ import org.kohsuke.MetaInfServices;
 
 import java.util.stream.IntStream;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-import static java.lang.Math.sqrt;
+import static java.lang.Math.*;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>

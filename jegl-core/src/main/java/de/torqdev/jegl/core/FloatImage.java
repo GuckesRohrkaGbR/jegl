@@ -3,7 +3,7 @@ package de.torqdev.jegl.core;
 import java.util.stream.IntStream;
 
 import static java.lang.Math.*;
-import static org.apache.commons.lang3.ArrayUtils.subarray;
+import static org.apache.commons.lang3.ArrayUtils.*;
 
 /**
  * Image representation in ARGB format.

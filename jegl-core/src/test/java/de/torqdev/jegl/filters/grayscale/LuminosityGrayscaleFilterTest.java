@@ -1,19 +1,20 @@
 package de.torqdev.jegl.filters.grayscale;
 
 import de.torqdev.jegl.core.FloatImage;
-import de.torqdev.jegl.filters.ImageFilter;
 import org.junit.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.core.Is.*;
+import static org.hamcrest.core.IsEqual.*;
 
 /**
  * @author <a href="mailto:jonas.egert@torq-dev.de">Jonas Egert</a>
  * @version 1.0
  */
-public class LuminosityGrayscaleFilterTest {
-    private ImageFilter filter = new LuminosityGrayscaleFilter();
+public class LuminosityGrayscaleFilterTest extends AbstractGrayscaleFilterTest {
+    public LuminosityGrayscaleFilterTest() {
+        super(new LuminosityGrayscaleFilter());
+    }
 
     @Test
     public void givenEmptyImage_returnsEmptyImage() throws Exception {

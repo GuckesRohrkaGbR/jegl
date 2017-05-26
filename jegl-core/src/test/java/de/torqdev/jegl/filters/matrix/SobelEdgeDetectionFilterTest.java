@@ -8,67 +8,31 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-import static java.lang.Math.sqrt;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
+import static java.lang.Math.*;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.core.Is.*;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class SobelEdgeDetectionFilterTest {
-    private static final AbstractFloatImageConverter<String> converter = new
-            GrayscaleFloatImageFromTextMatrixConverter();
-    private static final ImageFilter filter = new SobelEdgeDetectionFilter();
+public class SobelEdgeDetectionFilterTest extends AbstractEdgeDetectionFilterTest {
     public static final float B = (float) sqrt(0.5F);
 
-    @Test
-    public void givenEmptyImage_returnsEmptyImage() throws Exception {
-        // setup
-        FloatImage image = new FloatImage(0, 0, 1);
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getRawData().length, is(0));
-    }
-
-    @Test
-    public void givenAnyImage_returnsImageOfTheSameSize() throws Exception {
-        // setup
-        FloatImage image = new FloatImage(300, 200, 4);
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getWidth(), is(300));
-        assertThat(image.getHeight(), is(200));
-    }
-
-    @Test
-    public void givenAnyImage_returnsGrayscaleImage() throws Exception {
-        // setup
-        FloatImage image = new FloatImage(1, 1, 4);
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getChannels(), is(1));
+    public SobelEdgeDetectionFilterTest() {
+        super(new SobelEdgeDetectionFilter(), B);
     }
 
     @Test
     public void givenImageWithVerticalEdge_marksVerticalEdge() throws Exception {
         // setup
-        FloatImage image = converter.toFloatImage("0 1 0\n0 1 0\n0 1 0\n");
+        FloatImage image = CONVERTER.toFloatImage("0 1 0\n0 1 0\n0 1 0\n");
 
         // execute
         image = filter.processImage(image);
 
         // verify
-        FloatImage expected = converter.toFloatImage(
+        FloatImage expected = CONVERTER.toFloatImage(
                 "0.5 " + B + " 1\n0.5 " + B + " 1\n0.5 " + B + " 1");
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
@@ -76,13 +40,13 @@ public class SobelEdgeDetectionFilterTest {
     @Test
     public void givenImageWithHorizontalEdge_marksHorizontalEdge() throws Exception {
         // setup
-        FloatImage image = converter.toFloatImage("0 0 0\n1 1 1\n0 0 0\n");
+        FloatImage image = CONVERTER.toFloatImage("0 0 0\n1 1 1\n0 0 0\n");
 
         // execute
         image = filter.processImage(image);
 
         // verify
-        FloatImage expected = converter.toFloatImage(
+        FloatImage expected = CONVERTER.toFloatImage(
                 "0.5 0.5 0.5\n" + B + " " + B + " " + B + "\n1 1 1\n");
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
@@ -90,13 +54,13 @@ public class SobelEdgeDetectionFilterTest {
     @Test
     public void givenImageWithDiagonalEdge_marksDiagonalEdge() throws Exception {
         // setup
-        FloatImage image = converter.toFloatImage("1 0 0\n0 1 0\n0 0 1\n");
+        FloatImage image = CONVERTER.toFloatImage("1 0 0\n0 1 0\n0 0 1\n");
 
         // execute
         image = filter.processImage(image);
 
         // verify
-        FloatImage expected = converter.toFloatImage(
+        FloatImage expected = CONVERTER.toFloatImage(
                 "1 1 1\n1 " + B + " 1\n1 1 0\n");
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }

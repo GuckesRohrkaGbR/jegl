@@ -3,7 +3,7 @@ package de.torqdev.jegl.filters.color;
 import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
-import de.torqdev.jegl.filters.ImageFilter;
+import de.torqdev.jegl.filters.AbstractSameSizeImageFilterTest;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.*;
@@ -13,25 +13,16 @@ import static org.hamcrest.core.Is.*;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class BlackAndWhiteFilterTest {
+public class BlackAndWhiteFilterTest extends AbstractSameSizeImageFilterTest {
     private AbstractFloatImageConverter<String> converter = new
             GrayscaleFloatImageFromTextMatrixConverter();
-    private ImageFilter filter = new BlackAndWhiteFilter();
 
-    @Test
-    public void givenEmptyImage_returnsEmptyImage() throws Exception {
-        // setup
-        FloatImage image = new FloatImage(0, 0, 1);
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getRawData().length, is(0));
+    public BlackAndWhiteFilterTest() {
+        super(new BlackAndWhiteFilter());
     }
 
     @Test
-    public void givenAnyImage_returnsImageWithTheOneChannel() throws Exception {
+    public void givenAnyImage_returnsImageWithOneChannel() throws Exception {
         // setup
         FloatImage image = new FloatImage(0, 0, 3);
 
@@ -40,19 +31,6 @@ public class BlackAndWhiteFilterTest {
 
         // verify
         assertThat(image.getChannels(), is(1));
-    }
-
-    @Test
-    public void givenAnyImage_returnsImageOfTheSameSize() throws Exception {
-        // setup
-        FloatImage image = new FloatImage(300, 200, 4);
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getWidth(), is(300));
-        assertThat(image.getHeight(), is(200));
     }
 
     @Test

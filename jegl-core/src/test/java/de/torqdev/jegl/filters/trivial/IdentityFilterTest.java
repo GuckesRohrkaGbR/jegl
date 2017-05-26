@@ -1,10 +1,7 @@
 package de.torqdev.jegl.filters.trivial;
 
-import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FloatImage;
-import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
-import de.torqdev.jegl.filters.ImageFilter;
-import de.torqdev.jegl.filters.trivial.IdentityFilter;
+import de.torqdev.jegl.filters.AbstractSameSizeImageFilterTest;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -13,9 +10,10 @@ import static org.junit.Assert.*;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class IdentityFilterTest {
-    private AbstractFloatImageConverter<String> converter = new GrayscaleFloatImageFromTextMatrixConverter();
-    private ImageFilter filter = new IdentityFilter();
+public class IdentityFilterTest extends AbstractSameSizeImageFilterTest {
+    public IdentityFilterTest() {
+        super(new IdentityFilter());
+    }
 
     @Test
     public void givenAnyImage_returnsTheSameInstance() throws Exception {

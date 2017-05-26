@@ -4,7 +4,7 @@ import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.filters.ImageFilter;
 import org.kohsuke.MetaInfServices;
 
-import static java.lang.Math.min;
+import static java.lang.Math.*;
 
 /**
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>

@@ -2,8 +2,7 @@ package de.torqdev.jegl.filters.trivial;
 
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
-import de.torqdev.jegl.filters.ImageFilter;
-import de.torqdev.jegl.filters.trivial.CopyFilter;
+import de.torqdev.jegl.filters.AbstractSameSizeImageFilterTest;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -14,8 +13,10 @@ import static org.junit.Assert.*;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class CopyFilterTest {
-    private ImageFilter filter = new CopyFilter();
+public class CopyFilterTest extends AbstractSameSizeImageFilterTest {
+    public CopyFilterTest() {
+        super(new CopyFilter());
+    }
 
     @Test
     public void givenAnyImage_returnsADifferentInstance() throws Exception {

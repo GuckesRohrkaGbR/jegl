@@ -1,9 +1,6 @@
 package de.torqdev.jegl.filters.matrix;
 
-import de.torqdev.jegl.core.AbstractFloatImageConverter;
 import de.torqdev.jegl.core.FloatImage;
-import de.torqdev.jegl.core.GrayscaleFloatImageFromTextMatrixConverter;
-import de.torqdev.jegl.filters.ImageFilter;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -16,64 +13,15 @@ import static org.junit.Assert.*;
  * @author <a href="mailto:christopher.guckes@torq-dev.de">Christopher Guckes</a>
  * @version 1.0
  */
-public class BoxBlurFilterTest {
-    private AbstractFloatImageConverter<String> converter = new
-            GrayscaleFloatImageFromTextMatrixConverter();
-    private ImageFilter filter = new BoxBlurFilter();
-
-    @Test
-    public void givenEmptyImage_returnsEmptyImage() throws Exception {
-        // setup
-        FloatImage image = new FloatImage(0, 0, 1);
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getRawData().length, is(0));
-    }
-
-    @Test
-    public void givenAnyImage_returnsDifferentInstance() throws Exception {
-        // setup
-        FloatImage image = new FloatImage(0, 0, 1);
-
-        // execute
-        FloatImage processed = filter.processImage(image);
-
-        // verify
-        assertFalse(image == processed);
-    }
-
-    @Test
-    public void givenOnePixelImage_doesNothing() throws Exception {
-        // setup
-        FloatImage image = converter.toFloatImage("1");
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getRawData()[0], is(1F));
-    }
-
-    @Test
-    public void givenTwoEqualPixels_doesNothing() throws Exception {
-        // setup
-        FloatImage image = converter.toFloatImage("1 1");
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getRawData()[0], is(1F));
-        assertThat(image.getRawData()[1], is(1F));
+public class BoxBlurFilterTest extends AbstractBlurFilterTest {
+    public BoxBlurFilterTest() {
+        super(new BoxBlurFilter());
     }
 
     @Test
     public void givenTwoDifferentPixels_blursTheImage() throws Exception {
         // setup
-        FloatImage image = converter.toFloatImage("1 0");
+        FloatImage image = CONVERTER.toFloatImage("1 0");
 
         // execute
         image = filter.processImage(image);
@@ -86,7 +34,7 @@ public class BoxBlurFilterTest {
     @Test
     public void givenFourDifferentPixels_blursTheImage() throws Exception {
         // setup
-        FloatImage image = converter.toFloatImage("1 0\n0 1");
+        FloatImage image = CONVERTER.toFloatImage("1 0\n0 1");
 
         // execute
         image = filter.processImage(image);
@@ -96,29 +44,6 @@ public class BoxBlurFilterTest {
         assertThat(image.getRawData()[1], is(4 / 9F));
         assertThat(image.getRawData()[2], is(4 / 9F));
         assertThat(image.getRawData()[3], is(5 / 9F));
-    }
-
-    @Test
-    public void givenImageWithAlpha_alphaChannelIsUntouched() throws Exception {
-        // setup
-        FloatImage image = new FloatImage(2, 2, 4);
-        // @formatter:off
-        image.setRawData(new float[] {
-                0.2F, 1F, 1F, 1F,
-                0.4F, 1F, 0F, 0F,
-                0.6F, 0F, 1F, 0F,
-                0.8F, 0F, 0F, 1F
-        });
-        // @formatter:on
-
-        // execute
-        image = filter.processImage(image);
-
-        // verify
-        assertThat(image.getRawData()[0], is(0.2F));
-        assertThat(image.getRawData()[4], is(0.4F));
-        assertThat(image.getRawData()[8], is(0.6F));
-        assertThat(image.getRawData()[12], is(0.8F));
     }
 
     @Test
