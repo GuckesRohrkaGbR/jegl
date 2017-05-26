@@ -8,7 +8,7 @@ import org.kohsuke.MetaInfServices;
  */
 @MetaInfServices
 public class BoxBlurFilter extends AbstractMatrixFilter {
-    private static final float[] matrix = new float[]{
+    private static final float[] MATRIX = new float[]{
             // @formatter:off
             1, 1, 1,
             1, 1, 1,
@@ -19,6 +19,6 @@ public class BoxBlurFilter extends AbstractMatrixFilter {
     private static final float factor = 1 / 9F;
 
     public BoxBlurFilter() {
-        super(matrix, factor);
+        super(MATRIX, factor);
     }
 }

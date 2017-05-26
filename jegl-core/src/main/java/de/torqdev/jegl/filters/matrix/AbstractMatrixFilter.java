@@ -43,17 +43,23 @@ public abstract class AbstractMatrixFilter implements ImageFilter {
         float[] newPixel = getArrayWithSameChannelsAs(x, y, image);
         int channels = image.getChannels();
 
-
         IntStream.range(-1, 2).forEach(matrixY -> IntStream.range(-1, 2).forEach(
                 matrixX -> IntStream.range(channels == 4 ? 1 : 0, channels).forEach(
-                        channel -> newPixel[channel] += image.getCappedPixel(x + matrixX,
-                                                                             y + matrixY)
-                                [channel] * matrix[(matrixX + 1) + (matrixY + 1) * 3])));
+                        channel -> newPixel[channel] += getChannelValue(x, y, image, matrixY, matrixX,
+                                                                        channel))));
 
-        // divide at the end to avoid all your colors being rounded down to null;
         IntStream.range(channels == 4 ? 1 : 0, channels).forEach(
                 channel -> newPixel[channel] = normalize(newPixel[channel] * factor));
         return newPixel;
+    }
+
+    private float getChannelValue(int x, int y, FloatImage image, int matrixY, int matrixX, int channel) {
+        return image.getCappedPixel(x + matrixX, y + matrixY)[channel]
+                * matrix[matrixPosition(matrixY, matrixX)];
+    }
+
+    private int matrixPosition(int matrixY, int matrixX) {
+        return (matrixX + 1) + (matrixY + 1) * 3;
     }
 
     private float[] getArrayWithSameChannelsAs(int x, int y, FloatImage image) {

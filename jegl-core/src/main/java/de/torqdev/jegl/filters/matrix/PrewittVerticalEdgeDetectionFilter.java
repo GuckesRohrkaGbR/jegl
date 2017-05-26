@@ -7,11 +7,11 @@ import org.kohsuke.MetaInfServices;
  */
 @MetaInfServices
 public class PrewittVerticalEdgeDetectionFilter extends AbstractEdgeDetectorFilter {
-    private static final float[] prewittOperator = new float[]{-1, 0, 1, -1, 0, 1, -1, 0, 1,};
+    private static final float[] PREWITT_OPERATOR = new float[]{-1, 0, 1, -1, 0, 1, -1, 0, 1,};
     private static final float factor = 1F;
 
     protected PrewittVerticalEdgeDetectionFilter() {
-        super(prewittOperator, factor);
+        super(PREWITT_OPERATOR, factor);
     }
 }
 

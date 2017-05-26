@@ -7,7 +7,7 @@ import org.kohsuke.MetaInfServices;
  */
 @MetaInfServices
 public class GaussianBlurFilter extends AbstractMatrixFilter {
-    private static final float[] matrix = new float[]{
+    private static final float[] MATRIX = new float[]{
             // @formatter:off
             1, 2, 1,
             2, 4, 2,
@@ -17,7 +17,7 @@ public class GaussianBlurFilter extends AbstractMatrixFilter {
 
     private static final float factor = 1 / 16F;
 
-    public GaussianBlurFilter(float[] matrix, float factor) {
-        super(matrix, factor);
+    public GaussianBlurFilter() {
+        super(MATRIX, factor);
     }
 }

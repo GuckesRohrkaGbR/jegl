@@ -61,8 +61,8 @@ public class FloatImage {
     }
 
     public float[] getCappedPixel(int x, int y) {
-        x = max(0, min(getWidth() - 1, x));
-        y = max(0, min(getHeight() - 1, y));
-        return getPixel(x, y);
+        int cappedX = max(0, min(getWidth() - 1, x));
+        int cappedY = max(0, min(getHeight() - 1, y));
+        return getPixel(cappedX, cappedY);
     }
 }

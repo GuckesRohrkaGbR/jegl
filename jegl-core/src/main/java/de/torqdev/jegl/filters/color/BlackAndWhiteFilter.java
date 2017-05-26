@@ -15,7 +15,7 @@ import java.util.stream.IntStream;
  */
 @MetaInfServices
 public class BlackAndWhiteFilter implements ImageFilter {
-    private final static AverageGrayscaleFilter GRAYSCALE_FILTER = new AverageGrayscaleFilter();
+    private static final AverageGrayscaleFilter GRAYSCALE_FILTER = new AverageGrayscaleFilter();
     private final float threshold;
 
     public BlackAndWhiteFilter() {
@@ -30,10 +30,17 @@ public class BlackAndWhiteFilter implements ImageFilter {
     public FloatImage processImage(FloatImage image) {
         FloatImage gray = GRAYSCALE_FILTER.processImage(image);
 
+        // @formatter:off
         IntStream.range(0, gray.getHeight()).forEach(
-                y -> IntStream.range(0, gray.getWidth()).forEach(x -> {
-                    gray.setPixel(x, y, new float[]{thresholdFilter(gray.getPixel(x, y)[0])});
-                }));
+                y -> IntStream.range(0, gray.getWidth()).forEach(
+                        x -> gray.setPixel(
+                                x,
+                                y,
+                                new float[]{ thresholdFilter(gray.getPixel(x, y)[0])}
+                        )
+                )
+        );
+        // @formatter:on
         return gray;
     }
 

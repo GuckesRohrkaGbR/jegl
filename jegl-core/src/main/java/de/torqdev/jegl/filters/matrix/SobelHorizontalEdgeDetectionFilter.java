@@ -8,7 +8,7 @@ import org.kohsuke.MetaInfServices;
  */
 @MetaInfServices
 public class SobelHorizontalEdgeDetectionFilter extends AbstractEdgeDetectorFilter {
-    private static final float[] sobelOperator = new float[]{
+    private static final float[] SOBEL_OPERATOR = new float[]{
             // @formatter:off
             1, 2, 1,
             0, 0, 0,
@@ -18,6 +18,6 @@ public class SobelHorizontalEdgeDetectionFilter extends AbstractEdgeDetectorFilt
     private static final float factor = 1F;
 
     public SobelHorizontalEdgeDetectionFilter() {
-        super(sobelOperator, factor);
+        super(SOBEL_OPERATOR, factor);
     }
 }

@@ -14,8 +14,8 @@ import static java.lang.Math.*;
  */
 @MetaInfServices
 public class SobelEdgeDetectionFilter implements ImageFilter {
-    private static final ImageFilter verticalSobel = new SobelVerticalEdgeDetectionFilter();
-    private static final ImageFilter horizontalSobel = new SobelHorizontalEdgeDetectionFilter();
+    private static final ImageFilter VERTICAL_SOBEL = new SobelVerticalEdgeDetectionFilter();
+    private static final ImageFilter HORIZONTAL_SOBEL = new SobelHorizontalEdgeDetectionFilter();
 
     @Override
     public FloatImage processImage(FloatImage image) {
@@ -23,8 +23,8 @@ public class SobelEdgeDetectionFilter implements ImageFilter {
     }
 
     private FloatImage applySobel(FloatImage image) {
-        FloatImage vertical = verticalSobel.processImage(image);
-        FloatImage horizontal = horizontalSobel.processImage(image);
+        FloatImage vertical = VERTICAL_SOBEL.processImage(image);
+        FloatImage horizontal = HORIZONTAL_SOBEL.processImage(image);
 
         return combine(vertical, horizontal);
     }
