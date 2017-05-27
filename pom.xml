@@ -141,5 +141,6 @@
         <module>jegl-core</module>
         <module>jegl-awt</module>
         <module>jegl-swing</module>
+        <!--<module>jegl-android</module>-->
     </modules>
 </project>
