@@ -6,7 +6,6 @@ import de.torqdev.jegl.core.FloatImage;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.util.stream.IntStream;
 
 import static java.awt.image.BufferedImage.*;
 
@@ -41,7 +40,7 @@ public class FloatImageFromBufferedImageConverter
         for (int i = 0; i < pixels.length; i++) {
             for (int channel = 0; channel < channels; channel++) {
                 myReturn[i * channels + channel] = getFloatColorFromChannel(pixels[i], channel,
-                                                                            channels);
+                        channels);
             }
         }
         return myReturn;
@@ -55,15 +54,19 @@ public class FloatImageFromBufferedImageConverter
     @Override
     public BufferedImage fromFloatImage(FloatImage floatImage) {
         BufferedImage image = new BufferedImage(floatImage.getWidth(), floatImage.getHeight(),
-                                                getTypeFrom(floatImage));
+                getTypeFrom(floatImage));
         writePixelsToImage(floatImage, image);
         return image;
     }
 
     private void writePixelsToImage(FloatImage orig, BufferedImage image) {
-        IntStream.range(0, image.getHeight()).forEach(
-                y -> IntStream.range(0, image.getWidth()).forEach(
-                        x -> image.setRGB(x, y, getColorFrom(orig.getPixel(x, y)))));
+        int bound1 = image.getHeight();
+        for (int y = 0; y < bound1; y++) {
+            int bound = image.getWidth();
+            for (int x = 0; x < bound; x++) {
+                image.setRGB(x, y, getColorFrom(orig.getPixel(x, y)));
+            }
+        }
     }
 
     private int getColorFrom(float[] pixel) {

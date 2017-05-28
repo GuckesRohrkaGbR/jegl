@@ -62,12 +62,12 @@ public class ZealousCropFilter implements ImageFilter {
 
     private FloatImage crop(FloatImage image) {
         FloatImage cropped = new FloatImage(heterogeneousColumns.size(), heterogeneousRows.size(),
-                                            image.getChannels());
+                image.getChannels());
 
         for (int y = 0; y < heterogeneousRows.size(); y++) {
             for (int x = 0; x < heterogeneousColumns.size(); x++) {
                 cropped.setPixel(x, y, image.getPixel(heterogeneousColumns.get(x),
-                                                      heterogeneousRows.get(y)));
+                        heterogeneousRows.get(y)));
             }
         }
         return cropped;

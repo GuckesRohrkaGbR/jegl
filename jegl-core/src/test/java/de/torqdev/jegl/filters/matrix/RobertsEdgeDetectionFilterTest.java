@@ -12,9 +12,9 @@ import static org.hamcrest.core.Is.is;
  * @author <a href="mailto:jonas.egert@torq-dev.de">Jonas Egert</a>
  * @version 1.0
  */
-public class RobertEdgeDetectionFilterTest extends AbstractEdgeDetectionFilterTest{
-    public RobertEdgeDetectionFilterTest() {
-        super(new RobertEdgeDetectionFilter());
+public class RobertsEdgeDetectionFilterTest extends AbstractEdgeDetectionFilterTest{
+    public RobertsEdgeDetectionFilterTest() {
+        super(new RobertsEdgeDetectionFilter());
     }
 
     @Test
@@ -26,7 +26,6 @@ public class RobertEdgeDetectionFilterTest extends AbstractEdgeDetectionFilterTe
         image = filter.processImage(image);
 
         // verify
-        System.out.println(CONVERTER.fromFloatImage(image));
         FloatImage expected = CONVERTER.toFloatImage("0.5 0.5 0.5\n0 0 0\n1 1 1");
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
@@ -40,7 +39,6 @@ public class RobertEdgeDetectionFilterTest extends AbstractEdgeDetectionFilterTe
         image = filter.processImage(image);
 
         // verify
-        System.out.println(CONVERTER.fromFloatImage(image));
         FloatImage expected = CONVERTER.toFloatImage("0.5 0 1\n 0.5 0 1\n0.5 0 1");
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }

@@ -9,6 +9,10 @@ import org.apache.log4j.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
@@ -86,7 +90,12 @@ public class SideBySideView extends JFrame {
 
     private Component createOpenFileButton() {
         JButton button = new JButton("Open File");
-        button.addActionListener(e -> openFileDialog());
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openFileDialog();
+            }
+        });
         return button;
     }
 
@@ -106,7 +115,12 @@ public class SideBySideView extends JFrame {
 
     private Component createFilterChooser() {
         filterChooser.setModel(getComboBoxModel());
-        filterChooser.addItemListener(e -> this.displayImages());
+        filterChooser.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                displayImages();
+            }
+        });
         filterChooser.setRenderer(new ClassListCellRenderer());
         return filterChooser;
     }

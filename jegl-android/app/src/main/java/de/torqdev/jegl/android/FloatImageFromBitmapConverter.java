@@ -25,12 +25,6 @@ public class FloatImageFromBitmapConverter implements AbstractFloatImageConverte
 
             image.setPixel(x, y, toFloatArray(pixels[pixelId]));
         }
-//
-//        for (int y = 0; y < bitmap.getHeight(); y++) {
-//            for (int x = 0; x < bitmap.getWidth(); x++) {
-//                image.setPixel(x, y, toFloatArray(bitmap.getPixel(x, y)));
-//            }
-//        }
 
         return image;
     }

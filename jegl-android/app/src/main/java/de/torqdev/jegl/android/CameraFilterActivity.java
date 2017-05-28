@@ -24,7 +24,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -292,7 +291,9 @@ public class CameraFilterActivity extends AppCompatActivity {
     private void fillSpinner() {
         filterChooser = (Spinner) findViewById(R.id.filterChooser);
         List<FilterStringRenderer> filters = new ArrayList<>();
-        FilterUtil.getAllFilters().stream().map(FilterStringRenderer::new).forEach(filters::add);
+        for(ImageFilter filter : FilterUtil.getAllFilters()) {
+            filters.add(new FilterStringRenderer(filter));
+        }
 
         ArrayAdapter<FilterStringRenderer> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, filters);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);

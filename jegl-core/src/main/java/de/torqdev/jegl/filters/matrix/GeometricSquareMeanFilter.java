@@ -3,8 +3,6 @@ package de.torqdev.jegl.filters.matrix;
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.filters.ImageFilter;
 
-import java.util.stream.IntStream;
-
 import static java.lang.Math.*;
 
 /**
@@ -20,7 +18,7 @@ public class GeometricSquareMeanFilter implements ImageFilter {
         this.filter2 = filter2;
     }
 
-    private FloatImage applyFilter(FloatImage image){
+    private FloatImage applyFilter(FloatImage image) {
         FloatImage image1 = filter1.processImage(image);
         FloatImage image2 = filter2.processImage(image);
 
@@ -28,17 +26,15 @@ public class GeometricSquareMeanFilter implements ImageFilter {
     }
 
     private FloatImage combine(FloatImage image1, FloatImage image2) {
-        FloatImage filter = new FloatImage(image1.getWidth(), image1.getHeight(),1);
+        FloatImage filter = new FloatImage(image1.getWidth(), image1.getHeight(), 1);
 
-        IntStream.range(0, filter.getHeight()).forEach(
-                y -> IntStream.range(0, filter.getWidth()).forEach(x -> filter.setPixel(x, y,
-                        combinePixels(
-                                image1.getPixel(
-                                        x,
-                                        y),
-                                image2.getPixel(
-                                        x,
-                                        y)))));
+        int bound1 = filter.getHeight();
+        for (int y = 0; y < bound1; y++) {
+            int bound = filter.getWidth();
+            for (int x = 0; x < bound; x++) {
+                filter.setPixel(x, y, combinePixels(image1.getPixel(x, y), image2.getPixel(x, y)));
+            }
+        }
         return filter;
     }
 

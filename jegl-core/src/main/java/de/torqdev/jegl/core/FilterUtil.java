@@ -18,7 +18,9 @@ public final class FilterUtil {
     public static Collection<ImageFilter> getAllFilters() {
         Collection<ImageFilter> filters = new ArrayList<>();
         ServiceLoader<ImageFilter> loader = ServiceLoader.load(ImageFilter.class);
-        loader.forEach(filters::add);
+        for (ImageFilter filter : loader) {
+            filters.add(filter);
+        }
         return filters;
     }
 }

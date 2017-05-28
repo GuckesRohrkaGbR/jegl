@@ -3,7 +3,8 @@ package de.torqdev.jegl.filters.matrix;
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.filters.grayscale.AverageGrayscaleFilter;
 
-import static java.lang.Math.*;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 /**
  * Created by jonas on 26.05.17.

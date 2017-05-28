@@ -3,9 +3,8 @@ package de.torqdev.jegl.filters.matrix;
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.filters.ImageFilter;
 
-import java.util.stream.IntStream;
-
-import static java.lang.Math.*;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 /**
  * Created by lennart on 26.05.2017.
@@ -30,11 +29,15 @@ public abstract class AbstractMatrixFilter implements ImageFilter {
 
     private FloatImage blurred(FloatImage image) {
         FloatImage blurred = new FloatImage(image.getWidth(), image.getHeight(),
-                                            image.getChannels());
+                image.getChannels());
 
-        IntStream.range(0, image.getHeight()).parallel().forEach(
-                y -> IntStream.range(0, image.getWidth()).forEach(
-                        x -> blurred.setPixel(x, y, blur(x, y, image))));
+        int bound1 = image.getHeight();
+        for (int y = 0; y < bound1; y++) {
+            int bound = image.getWidth();
+            for (int x = 0; x < bound; x++) {
+                blurred.setPixel(x, y, blur(x, y, image));
+            }
+        }
 
         return blurred;
     }
@@ -43,13 +46,18 @@ public abstract class AbstractMatrixFilter implements ImageFilter {
         float[] newPixel = getArrayWithSameChannelsAs(x, y, image);
         int channels = image.getChannels();
 
-        IntStream.range(-1, 2).forEach(matrixY -> IntStream.range(-1, 2).forEach(
-                matrixX -> IntStream.range(channels == 4 ? 1 : 0, channels).forEach(
-                        channel -> newPixel[channel] += getChannelValue(x, y, image, matrixY,
-                                                                        matrixX, channel))));
+        for (int matrixY = -1; matrixY < 2; matrixY++) {
+            for (int matrixX = -1; matrixX < 2; matrixX++) {
+                for (int channel = channels == 4 ? 1 : 0; channel < channels; channel++) {
+                    newPixel[channel] += getChannelValue(x, y, image, matrixY,
+                            matrixX, channel);
+                }
+            }
+        }
 
-        IntStream.range(channels == 4 ? 1 : 0, channels).forEach(
-                channel -> newPixel[channel] = normalize(newPixel[channel] * factor));
+        for (int channel = channels == 4 ? 1 : 0; channel < channels; channel++) {
+            newPixel[channel] = normalize(newPixel[channel] * factor);
+        }
         return newPixel;
     }
 

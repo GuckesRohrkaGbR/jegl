@@ -1,9 +1,8 @@
 package de.torqdev.jegl.core;
 
-import java.util.stream.IntStream;
-
-import static java.lang.Math.*;
-import static org.apache.commons.lang3.ArrayUtils.*;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
+import static org.apache.commons.lang3.ArrayUtils.subarray;
 
 /**
  * Image representation in ARGB format.
@@ -48,8 +47,10 @@ public class FloatImage {
     }
 
     public void setPixel(int x, int y, float[] pixel) {
-        IntStream.range(0, pixel.length).forEach(
-                i -> rawData[coordsToArrayIndex(x, y) + i] = pixel[i]);
+        int bound = pixel.length;
+        for (int i = 0; i < bound; i++) {
+            rawData[coordsToArrayIndex(x, y) + i] = pixel[i];
+        }
     }
 
     private int coordsToArrayIndex(int x, int y) {

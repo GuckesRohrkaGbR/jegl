@@ -1,7 +1,9 @@
 package de.torqdev.jegl.swing;
 
 import org.assertj.swing.core.matcher.JButtonMatcher;
+import org.assertj.swing.edt.GuiActionRunnable;
 import org.assertj.swing.edt.GuiActionRunner;
+import org.assertj.swing.edt.GuiQuery;
 import org.assertj.swing.fixture.FrameFixture;
 import org.assertj.swing.junit.testcase.AssertJSwingJUnitTestCase;
 import org.junit.Test;
@@ -20,7 +22,12 @@ public class SideBySideViewTest extends AssertJSwingJUnitTestCase {
 
     @Override
     protected void onSetUp() {
-        SideBySideView frame = GuiActionRunner.execute(SideBySideView::new);
+        SideBySideView frame = GuiActionRunner.execute(new GuiQuery<SideBySideView>() {
+            @Override
+            protected SideBySideView executeInEDT() throws Throwable {
+                return new SideBySideView();
+            }
+        });
         window = new FrameFixture(robot(), frame);
         window.show();
     }

@@ -5,8 +5,6 @@ import de.torqdev.jegl.filters.ImageFilter;
 import de.torqdev.jegl.filters.grayscale.AverageGrayscaleFilter;
 import org.kohsuke.MetaInfServices;
 
-import java.util.stream.IntStream;
-
 /**
  * Simple filter that renders all colors above the given threshold white and all others black.
  *
@@ -30,17 +28,14 @@ public class BlackAndWhiteFilter implements ImageFilter {
     public FloatImage processImage(FloatImage image) {
         FloatImage gray = GRAYSCALE_FILTER.processImage(image);
 
-        // @formatter:off
-        IntStream.range(0, gray.getHeight()).parallel().forEach(
-                y -> IntStream.range(0, gray.getWidth()).forEach(
-                        x -> gray.setPixel(
-                                x,
-                                y,
-                                new float[]{ thresholdFilter(gray.getPixel(x, y)[0])}
-                        )
-                )
-        );
-        // @formatter:on
+        int bound1 = gray.getHeight();
+        for (int y = 0; y < bound1; y++) {
+            int bound = gray.getWidth();
+            for (int x = 0; x < bound; x++) {
+                gray.setPixel(x, y, new float[]{thresholdFilter(gray.getPixel(x, y)[0])}
+                );
+            }
+        }
         return gray;
     }
 

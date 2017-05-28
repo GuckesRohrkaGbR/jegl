@@ -3,8 +3,6 @@ package de.torqdev.jegl.filters.grayscale;
 import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.filters.ImageFilter;
 
-import java.util.stream.IntStream;
-
 /**
  * Created by lennart on 26.05.2017.
  */
@@ -21,8 +19,10 @@ public abstract class AbstractGrayscaleFilter implements ImageFilter {
 
         FloatImage gray = new FloatImage(image.getWidth(), image.getHeight(), 1);
         float[] grayData = gray.getRawData();
-        IntStream.range(0, grayData.length).parallel().forEach(
-                i -> grayData[i] = calculateGrayValueAt(i, image));
+        int bound = grayData.length;
+        for (int i = 0; i < bound; i++) {
+            grayData[i] = calculateGrayValueAt(i, image);
+        }
         return gray;
     }
 

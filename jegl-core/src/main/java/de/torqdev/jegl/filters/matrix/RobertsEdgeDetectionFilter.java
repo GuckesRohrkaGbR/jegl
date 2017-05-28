@@ -8,7 +8,7 @@ import org.kohsuke.MetaInfServices;
  * @version 1.0
  */
 @MetaInfServices(value = ImageFilter.class)
-public class RobertEdgeDetectionFilter extends AbstractEdgeDetectorFilter{
+public class RobertsEdgeDetectionFilter extends AbstractEdgeDetectorFilter {
     private static final float[] ROBERT_OPERATOR = new float[]{
             1, 0, 0,
             0, -1, 0,
@@ -16,7 +16,7 @@ public class RobertEdgeDetectionFilter extends AbstractEdgeDetectorFilter{
     };
     private static final float FACTOR = 1f;
 
-    public RobertEdgeDetectionFilter() {
+    public RobertsEdgeDetectionFilter() {
         super(ROBERT_OPERATOR, FACTOR);
     }
 }
