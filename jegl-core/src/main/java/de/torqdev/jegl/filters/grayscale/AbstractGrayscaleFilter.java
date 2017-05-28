@@ -21,7 +21,7 @@ public abstract class AbstractGrayscaleFilter implements ImageFilter {
 
         FloatImage gray = new FloatImage(image.getWidth(), image.getHeight(), 1);
         float[] grayData = gray.getRawData();
-        IntStream.range(0, grayData.length).forEach(
+        IntStream.range(0, grayData.length).parallel().forEach(
                 i -> grayData[i] = calculateGrayValueAt(i, image));
         return gray;
     }
