@@ -72,7 +72,9 @@ public class CameraFilterActivity extends AppCompatActivity {
     private Handler backgroundHandler;
     private HandlerThread backgroundThread;
 
-    private AbstractFloatImageConverter<Bitmap> converter = new FloatImageFromBitmapConverter();
+    private AbstractFloatImageConverter<Bitmap> bitmapConverter = new FloatImageFromBitmapConverter();
+    private AbstractFloatImageConverter<Image> imageConverter = new FloatImageFromImageConverter();
+
     private Spinner filterChooser;
 
     TextureView.SurfaceTextureListener textureListener = new TextureView.SurfaceTextureListener() {
@@ -159,25 +161,21 @@ public class CameraFilterActivity extends AppCompatActivity {
                 @Override
                 public void onImageAvailable(ImageReader reader) {
                     Image image = reader.acquireNextImage();
-                    ByteBuffer buffer = image.getPlanes()[0].getBuffer();
-                    byte[] bytes = new byte[buffer.capacity()];
-                    buffer.get(bytes);
-                    Bitmap bitmapImage = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, null);
-                    displayImage(filterImage(bitmapImage));
-                    bitmapImage.recycle();
+                    displayImage(filterImage(image));
                     image.close();
                 }
 
-                private Bitmap filterImage(Bitmap image) {
+                private Bitmap filterImage(Image image) {
+                    Bitmap bitmap = Bitmap.createBitmap(image.getWidth(), image.getHeight(), null);
                     if(filterChooser != null && filterChooser.getSelectedItem() != null) {
                         ImageFilter filter = ((FilterStringRenderer) filterChooser.getSelectedItem()).getFilter();
-                        image = converter.fromFloatImage(
+                        bitmap = bitmapConverter.fromFloatImage(
                                 filter.processImage(
-                                        converter.toFloatImage(image)
+                                        imageConverter.toFloatImage(image)
                                 )
                         );
                     }
-                    return image;
+                    return bitmap;
                 }
 
                 private void displayImage(Bitmap image) {
