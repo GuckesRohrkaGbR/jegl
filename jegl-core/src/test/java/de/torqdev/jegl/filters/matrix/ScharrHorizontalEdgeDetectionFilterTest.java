@@ -25,7 +25,6 @@ public class ScharrHorizontalEdgeDetectionFilterTest extends AbstractEdgeDetecti
         image = filter.processImage(image);
 
         // verify
-        /*System.out.println(CONVERTER.fromFloatImage(image)); */
         FloatImage expected = CONVERTER.toFloatImage("0 0 0\n0.5 0.5 0.5\n1 1 1");
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }

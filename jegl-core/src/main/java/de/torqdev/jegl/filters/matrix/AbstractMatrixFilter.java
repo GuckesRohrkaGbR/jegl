@@ -32,7 +32,7 @@ public abstract class AbstractMatrixFilter implements ImageFilter {
         FloatImage blurred = new FloatImage(image.getWidth(), image.getHeight(),
                                             image.getChannels());
 
-        IntStream.range(0, image.getHeight()).forEach(
+        IntStream.range(0, image.getHeight()).parallel().forEach(
                 y -> IntStream.range(0, image.getWidth()).forEach(
                         x -> blurred.setPixel(x, y, blur(x, y, image))));
 

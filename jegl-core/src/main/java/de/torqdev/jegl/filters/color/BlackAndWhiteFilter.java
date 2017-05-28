@@ -31,7 +31,7 @@ public class BlackAndWhiteFilter implements ImageFilter {
         FloatImage gray = GRAYSCALE_FILTER.processImage(image);
 
         // @formatter:off
-        IntStream.range(0, gray.getHeight()).forEach(
+        IntStream.range(0, gray.getHeight()).parallel().forEach(
                 y -> IntStream.range(0, gray.getWidth()).forEach(
                         x -> gray.setPixel(
                                 x,

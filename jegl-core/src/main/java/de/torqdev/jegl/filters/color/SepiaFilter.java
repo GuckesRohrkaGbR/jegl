@@ -4,6 +4,8 @@ import de.torqdev.jegl.core.FloatImage;
 import de.torqdev.jegl.filters.ImageFilter;
 import org.kohsuke.MetaInfServices;
 
+import java.util.stream.IntStream;
+
 import static java.lang.Math.*;
 
 /**
@@ -16,13 +18,11 @@ public class SepiaFilter implements ImageFilter {
     public FloatImage processImage(FloatImage image) {
         FloatImage sepia = new FloatImage(image.getWidth(), image.getHeight(), 3);
 
-        for (int y = 0; y < image.getHeight(); y++) {
-            for (int x = 0; x < image.getWidth(); x++) {
-                float[] pixel = image.getPixel(x, y);
-                sepia.setPixel(x, y, sepiaForPixel(pixel));
-            }
-        }
-
+        IntStream.range(0, image.getHeight()).parallel().forEach(
+                y -> IntStream.range(0, image.getWidth()).forEach(
+                        x -> sepia.setPixel(x, y, sepiaForPixel(image.getPixel(x, y)))
+                )
+        );
         return sepia;
     }
 

@@ -25,7 +25,6 @@ public class ScharrVerticalEdgeDetectionFilterTest extends AbstractEdgeDetection
         image = filter.processImage(image);
 
         // verify
-        System.out.println(CONVERTER.fromFloatImage(image));
         FloatImage expected = CONVERTER.toFloatImage("0 0.5 1\n0 0.5 1\n0 0.5 1");
         assertThat(Arrays.equals(image.getRawData(), expected.getRawData()), is(true));
     }
